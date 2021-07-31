@@ -1,0 +1,25 @@
+{
+  "name": "bypass-it-for-me",
+  "version": "1.0.0",
+  "description": "Bypasses link protectors server-side.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.foreskin.live/tacohitbox/bypass-it-for-me.git"
+  },
+  "keywords": [
+    "bypass",
+    "link-bypass"
+  ],
+  "author": "tacohitbox",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.1",
+    "got": "^11.8.2",
+    "set-cookie-parser": "^2.4.8"
+  }
+}

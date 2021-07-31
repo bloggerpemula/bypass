@@ -10,7 +10,7 @@ const ityim = require("./ityim");
 const tei = require("./teiai");
 const adyoume = require("./adyoume");
 const ouo = require("./ouo");
-const generic = require("./generic");
+const generic = require("./.generic");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {

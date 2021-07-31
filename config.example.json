@@ -1,0 +1,8 @@
+{
+  "externalCaptchaProvider": {
+    "active": false,
+    "service": "n/a",
+    "key": "n/a"
+  },
+  "port": 32333
+}

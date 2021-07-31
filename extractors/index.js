@@ -8,6 +8,8 @@ const boostink = require("./boostink");
 const adfocus = require("./adfocus");
 const ityim = require("./ityim");
 const tei = require("./teiai");
+const adyoume = require("./adyoume");
+const ouo = require("./ouo");
 const generic = require("./generic");
 
 exports.bypass = function(obj, cb) {
@@ -57,8 +59,18 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
-    case "tei":
+    case "teiai":
       tei.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "adyoume":
+      adyoume.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "ouo":
+      ouo.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -74,7 +86,7 @@ exports.getType = function(link) {
     case "adshrink.it":
       return {
         "site": "adshrink",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
     case "linkvertise.com":
     case "linkvertise.net":
@@ -83,13 +95,13 @@ exports.getType = function(link) {
     case "direct-link.net":
       return {
         "site": "linkvertise",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
     case "www.shortly.xyz":
     case "shortly.xyz":
       return {
         "site": "shortly",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       }
     case "sub2unlock.com":
     case "www.sub2unlock.com":
@@ -97,13 +109,13 @@ exports.getType = function(link) {
     case "www.sub2unlock.net":
       return {
         "site": "sub2unlock",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
     case "shortconnect.com":
     case "www.shortconnect.com":
       return {
         "site": "shortconnect",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
     case "boost.ink":
     case "bst.wtf":
@@ -111,28 +123,39 @@ exports.getType = function(link) {
     case "bst.gg":
       return {
         "site": "boostink",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
     case "adfoc.us":
       return {
         "site": "adfocus",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
     case "ity.im":
       return {
         "site": "ityim",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
     case "tei.ai":
     case "tii.ai":
       return {
-        "site": "tei",
-        "hasCaptcha": false
+        "site": "teiai",
+        "needsExternalCaptchaSolving": false
+      };
+    case "adyou.me":
+      return {
+        "site": "adyoume",
+        "needsExternalCaptchaSolving": true
+      };
+    case "ouo.io":
+    case "ouo.press":
+      return {
+        "site": "ouo",
+        "needsExternalCaptchaSolving": true
       };
     default:
       return {
         "site": "generic",
-        "hasCaptcha": false
+        "needsExternalCaptchaSolving": false
       };
   }
 }

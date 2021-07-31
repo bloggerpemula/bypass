@@ -1,6 +1,6 @@
 const got = require("got");
 const cheerio = require("cheerio");
-const utils = require("../scraper-utils");
+const utils = require("../.utils");
 
 exports.bypass = function(url, cb) {
   got(url, {

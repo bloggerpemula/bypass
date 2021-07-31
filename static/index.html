@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BypassItForMe</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/load.css" rel="stylesheet">
+    <meta name="viewport" content="width=devide-width, inital-scale=1.0">
+  </head>
+  <body>
+    <div>
+      <h2 style="margin:0 0 5px 0">BypassItForMe</h2>
+      <p class="nm">Bypass adlinks and tracking with BIFM.</p>
+    </div>
+    <div class="rs">
+      <input placeholder="Enter the wanted URL here." id="url"> 
+      <button class="bp-btn" onclick="bypass();">Bypass</button>
+      <div id="load" style="display:none;">
+        <div>
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+      </div>
+      <div id="success" style="display:none;">
+        <p>Got link: <a id="link"></a></p>
+      </div>
+      <div id="error" style="display:none;">
+        <p>An error has occured! <span style="color:red;" id="err-txt"></span></p>
+      </div>
+    </div>
+    <p style="margin:5px 0;">This site is open sourced (<a href="https://git.foreskin.live/tacohitbox/bypass-it-for-me">source code</a>).</p>
+    <noscript>
+      <i>This website uses Javascript. You can use our API documented <a href="https://git.foreskin.live/tacohitbox/bypass-it-for-me">here</a> if needed.</i>
+    </noscript>
+  </body>
+  <script src="/js/unhide.js"></script>
+  <script src="/js/app.js"></script>
+</html>

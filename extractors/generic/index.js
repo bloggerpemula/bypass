@@ -50,13 +50,17 @@ exports.bypass = function(url, cb) {
       }
       cb(null, r);
     } else if (resp.headers.location) {
-      require(".").bypass(resp.headers.location, function(err, resp) {
-        if (err) {
-          cb(null, resp.headers.location);
-        } else {
-          cb(null, resp);
-        }
-      })
+      if (resp.url.includes("//adf.ly")) {
+        require(".").bypass(resp.headers.location, function(err, res) {
+          if (err) {
+            cb(null, resp.headers.location);
+          } else {
+            cb(null, res);
+          }
+        })
+      } else {
+        cb(null, resp.headers.location);
+      }
     } else {
       cb("No redirects found.", null);
     }

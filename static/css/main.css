@@ -1,0 +1,49 @@
+body {
+  font-family:Helvetica, Arial, sans-serif;
+}
+
+.nm {
+  margin:0;
+}
+
+.nmi *{
+  margin:0;
+}
+
+#url {
+  margin:5px 0 0 0;
+  max-width:500px;
+  width:calc(100% - 75px);
+  height:24px;
+  padding:1px 4px;
+  border-radius:4px;
+}
+
+#success {
+  border-radius:4px;
+  background:#43ff43;
+  padding:10px;
+  color:black;
+  word-wrap:break-word;
+}
+
+#error {
+  background:#e1e1e1;
+  border-radius:4px;
+  padding:10px;
+  color:black;
+  word-wrap:break-word;
+}
+
+#success, #error {
+  margin-top:7.5px;
+}
+
+#success p, #error p {
+  margin:0;
+}
+
+.bp-btn {
+  width:55px;
+  height:30px;
+} 

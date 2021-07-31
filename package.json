@@ -17,6 +17,8 @@
   "author": "tacohitbox",
   "license": "UNLICENSED",
   "dependencies": {
+    "@antiadmin/anticaptchaofficial": "^1.0.14",
+    "agate": "^0.0.1",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.1",
     "got": "^11.8.2",

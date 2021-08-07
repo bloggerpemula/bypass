@@ -53,4 +53,28 @@ app.get("/api/bypass", function(req, res) {
       err: "URL is required for this parameter."
     });
   }
+});
+
+app.get("/api/officially-supported", function(req, res) {
+  var u = url.parse(req.url, true);
+  if (u.query.url) {
+    var requestedUrl = Buffer.from(u.query.url, "base64").toString("ascii");
+    var t = extractors.getType(requestedUrl);
+    if (t == "generic") {
+      res.send({
+        "success": true,
+        "result": "maybe"
+      });
+    } else {
+      res.send({
+        "success": true,
+        "result": "yes"
+      });
+    }
+  } else {
+    res.send({
+      "success": false,
+      "result": "no"
+    });
+  }
 })

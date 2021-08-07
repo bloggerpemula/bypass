@@ -1,4 +1,5 @@
 const anticaptcha = require("@antiadmin/anticaptchaofficial");
+const two = require("2captcha");
 
 exports.totalBytes = function(string) {
   return encodeURI(string).split(/%..|./).length - 1;
@@ -39,6 +40,17 @@ exports.captcha = function(obj, cb) {
       }).catch(function(err) {
         cb(err, null);
       })
+    return;
+
+    case "2captcha":
+      const tc = new two.Solver(obj.service.key);
+      tc.recaptcha(obj.meta.sitekey, obj.ref).then(function(resp) {
+        cb(null, {
+          token: resp
+        });
+      }).catch(function(err) {
+        cb(err, null);
+      });
     return;
 
     default:

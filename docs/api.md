@@ -1,5 +1,7 @@
 # API
 
+Here are all the API endpoints you can use with BypassItForMe. If you plan on using the [main instance](https://bifm.tacohitbox.com), please [contact me](https://tacohitbox.com/) as I'm interested in seeing.
+
 ## GET ``/api/bypass``
 
 ### Parameters

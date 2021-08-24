@@ -142,6 +142,9 @@ exports.getType = function(link) {
         "needsExternalCaptchaSolving": false
       };
     case "adyou.me":
+    case "adyou.co":
+    case "adyou.ws":
+    case "shortadd.com":
       return {
         "site": "adyoume",
         "needsExternalCaptchaSolving": true

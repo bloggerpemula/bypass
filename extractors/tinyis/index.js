@@ -21,8 +21,8 @@ exports.bypass = function(url, cb) {
     }
   }).then(function(resp) {
     var $ = cheerio.load(resp.body);
-    cb(null, Buffer.from(`aHR${$("#link-view form [name='token']").val().split("aHR").slice(1).join("aHR")}`, "base64").toString("ascii"));
+    cb(null, $("#skip-btn").attr("href"));
   }).catch(function(err) {
     cb(err, null);
-  });
+  })
 }

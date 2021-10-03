@@ -11,6 +11,7 @@ const tei = require("./teiai");
 const adyoume = require("./adyoume");
 const ouo = require("./ouo");
 const generic = require("./.generic");
+const tinyis = require("./tinyis");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -71,6 +72,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "ouo":
       ouo.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "tinyis":
+      tinyis.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -154,6 +160,11 @@ exports.getType = function(link) {
       return {
         "site": "ouo",
         "needsExternalCaptchaSolving": true
+      };
+    case "tinyurl.is":
+      return {
+        "site": "tinyis",
+        "needsExternalCaptchaSolving": false
       };
     default:
       return {

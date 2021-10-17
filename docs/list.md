@@ -21,5 +21,6 @@ The true list of compatible sites always depends on the location, availablity, c
 # Captcha-Required sites
 **Note**: These bypasses only work *if* the instance supports it.
 
+
 - ouo.io / ouo.press
 - cpmlink.net

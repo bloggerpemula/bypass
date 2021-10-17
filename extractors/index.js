@@ -12,6 +12,7 @@ const adyoume = require("./adyoume");
 const ouo = require("./ouo");
 const generic = require("./.generic");
 const tinyis = require("./tinyis");
+const youtube = require("./youtube");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -77,6 +78,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "tinyis":
       tinyis.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "youtube":
+      youtube.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -164,6 +170,13 @@ exports.getType = function(link) {
     case "tinyurl.is":
       return {
         "site": "tinyis",
+        "needsExternalCaptchaSolving": false
+      };
+    case "youtu.be":
+    case "youtube.com":
+    case "www.youtube.com":
+      return {
+        "site": "youtube",
         "needsExternalCaptchaSolving": false
       };
     default:

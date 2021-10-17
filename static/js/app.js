@@ -52,3 +52,8 @@ function bypass() {
     document.getElementById("err-txt").innerHTML = "The request was aborted.";
   }
 }
+
+function thisone() {
+  document.getElementById("url").value = document.getElementById("link").href;
+  bypass(); 
+}

@@ -35,7 +35,7 @@ app.get("/api/bypass", function(req, res) {
           key: config.externalCaptchaProvider.key
         }
       }, function(err, resp) {
-        if (err) {res.send({
+        if (err && err !== null) {res.send({
           success: false,
           err: err.stack || err.message || err
         });} else {

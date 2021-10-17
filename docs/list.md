@@ -17,6 +17,7 @@ The true list of compatible sites always depends on the location, availablity, c
 - tii.ai
 - adyou.me / adyou.co / adyou.ws / shortadd.com
 - tinyurl.is (not to be confused with tinyurl.com)
+- adf.ly (and all aliases adf.ly is currently using)
 
 
 # Captcha-Required sites

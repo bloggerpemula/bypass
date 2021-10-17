@@ -13,6 +13,7 @@ const ouo = require("./ouo");
 const generic = require("./.generic");
 const tinyis = require("./tinyis");
 const youtube = require("./youtube");
+const cpmlink = require("./cpmlink");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -83,6 +84,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "youtube":
       youtube.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "cpmlink":
+      cpmlink.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -172,11 +178,17 @@ exports.getType = function(link) {
         "site": "tinyis",
         "needsExternalCaptchaSolving": false
       };
+    case "yt.be":
     case "youtu.be":
     case "youtube.com":
     case "www.youtube.com":
       return {
         "site": "youtube",
+        "needsExternalCaptchaSolving": false
+      };
+    case "cpmlink.net":
+      return {
+        "site": "cpmlink",
         "needsExternalCaptchaSolving": false
       };
     default:

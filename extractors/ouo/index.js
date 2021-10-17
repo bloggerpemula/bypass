@@ -34,7 +34,12 @@ exports.bypass = function(obj, cb) {
       service: obj.captcha
     }, function(err, response) {
       if (err) {cb(err, null);} else {
-        var b = `_token=${encodeURIComponent($("#form-captcha [name=_token]").val())}&x-token=${response.token}&v-token=${$("#v-token").val()}`;
+        if (typeof response.token == "object") {
+          var r = response.token.data;
+        } else {
+          var r = response.token;
+        }
+        var b = `_token=${encodeURIComponent($("#form-captcha [name=_token]").val())}&x-token=${r}&v-token=${$("#v-token").val()}`;
         got.post($("#form-captcha").attr("action"), {
           followRedirect: false,
           body: b,

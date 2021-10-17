@@ -1,6 +1,8 @@
 # List of Compatible Sites
 The true list of compatible sites always depends on the location, availablity, captcha-supporting, and overall quality of the instance you're using.
 
+**Note**: In addition to all the sites below, this tool also supports all general redirects (like bit.ly and tinyurl.com) by default. There's too many to list however, so sites like those are not listed here.
+
 ## Captcha-Free sites
 - adfoc.us
 - adshrink.it
@@ -15,12 +17,10 @@ The true list of compatible sites always depends on the location, availablity, c
 - tii.ai
 - adyou.me / adyou.co / adyou.ws / shortadd.com
 - tinyurl.is (not to be confused with tinyurl.com)
-- 
 
 
 # Captcha-Required sites
 **Note**: These bypasses only work *if* the instance supports it.
-
 
 - ouo.io / ouo.press
 - cpmlink.net

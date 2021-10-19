@@ -61,7 +61,7 @@ exports.bypass = function(url, cb) {
       } else {
         cb(null, resp.headers.location);
       }
-    } else if (resp.body.includes(`http-equiv="refresh" content=`)) {
+    } else if (resp.body.includes(`content="0;URL=`)) {
       cb(null, resp.body.split(`content="0;URL=`)[1].split(`"`)[0]);
     } else {
       cb("No redirects found.", null);

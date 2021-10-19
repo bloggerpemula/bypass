@@ -15,6 +15,7 @@ const tinyis = require("./tinyis");
 const youtube = require("./youtube");
 const cpmlink = require("./cpmlink");
 const tooyul = require("./tooyul");
+const exe = require("./exe");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -98,6 +99,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
+    /*case "exe":
+      exe.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;*/
     default:
       cb("No valid site specified.", null);
     return;
@@ -202,6 +208,12 @@ exports.getType = function(link) {
         "site": "tooyul",
         "needsExternalCaptchaSolving": false
       };
+    /*case "exe.io":
+    case "exey.io":
+      return {
+        "site": "exe",
+        "needsExternalCaptchaSolving": true
+      };*/
     default:
       return {
         "site": "generic",

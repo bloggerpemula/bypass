@@ -1,7 +1,6 @@
 const got = require("got");
 const cheerio = require("cheerio");
 const scp = require("set-cookie-parser");
-const u = require("url");
 const utils = require("../.utils");
 
 exports.bypass = function(obj, cb) {

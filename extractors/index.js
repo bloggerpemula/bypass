@@ -14,6 +14,7 @@ const generic = require("./.generic");
 const tinyis = require("./tinyis");
 const youtube = require("./youtube");
 const cpmlink = require("./cpmlink");
+const tooyul = require("./tooyul");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -89,6 +90,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "cpmlink":
       cpmlink.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "tooyul":
+      tooyul.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -189,6 +195,11 @@ exports.getType = function(link) {
     case "cpmlink.net":
       return {
         "site": "cpmlink",
+        "needsExternalCaptchaSolving": true
+      };
+    case "tooyul.co":
+      return {
+        "site": "tooyul",
         "needsExternalCaptchaSolving": false
       };
     default:

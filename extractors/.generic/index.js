@@ -1,6 +1,15 @@
 const got = require("got");
+const u = require("url");
+const cheerio = require("cheerio");
 
 exports.bypass = function(url, cb) {
+  if (
+    url.split("//").slice(1)[0].split("/")[0] == "href.li" ||
+    url.split("//").slice(1)[0].split("/")[0] == "www.href.li"
+  ) {
+    cb(null, url.split("?").slice(1).join("?"));
+    return;
+  }
   got(url, {
     followRedirect: false,
     headers: {
@@ -64,7 +73,16 @@ exports.bypass = function(url, cb) {
     } else if (resp.body.includes(`content="0;URL=`)) {
       cb(null, resp.body.split(`content="0;URL=`)[1].split(`"`)[0]);
     } else {
-      cb("No redirects found.", null);
+      var $ = cheerio.load(resp.body);
+      if ($("#wpsafe-link a").attr("href") && $("#wpsafe-link a").attr("href").includes("safelink_redirect")) {
+        var a = u.parse($("#wpsafe-link a").attr("href"), true).query["safelink_redirect"];
+        a = Buffer.from(a, "base64").toString("ascii");
+        a = JSON.parse(a);
+        a = decodeURIComponent(a.safelink);
+        cb(null, a);
+      } else {
+        cb("No redirects found.", null);
+      }
     }
   }).catch(function(err) {
     cb(err, null);

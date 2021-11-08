@@ -18,7 +18,8 @@ The true list of compatible sites always depends on the location, availablity, c
 - adyou.me / adyou.co / adyou.ws / shortadd.com
 - tinyurl.is (not to be confused with tinyurl.com)
 - adf.ly (and all aliases adf.ly is currently using)
-
+- href.li
+- ``wpsafelink`` using sites (ps2gamer.com, saferoms.com)
 
 # Captcha-Required sites
 **Note**: These bypasses only work *if* the instance supports it.

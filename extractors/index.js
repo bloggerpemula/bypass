@@ -17,6 +17,7 @@ const cpmlink = require("./cpmlink");
 const tooyul = require("./tooyul");
 const exe = require("./exe");
 const ml = require("./mylink");
+const boostme = require("./boostme");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -110,6 +111,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;*/
+    case "boostme":
+      boostme.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
     default:
       cb("No valid site specified.", null);
     return;
@@ -220,7 +226,7 @@ exports.getType = function(link) {
         "site": "exe",
         "needsExternalCaptchaSolving": true
       };*/
-    case "mylink.cloud":
+    /*case "mylink.cloud":
     case "mylink.vc":
     case "mylink.name":
     case "mylink.cx":
@@ -229,7 +235,13 @@ exports.getType = function(link) {
       return {
         "site": "mylink",
         "needsExternalCaptchaSolving": true
-      }
+      };*/
+    case "boostme.link":
+    case "boost.fusedgt.com":
+      return {
+        "site": "boostme",
+        "needsExternalCaptchaSolving": false
+      };
     default:
       return {
         "site": "generic",

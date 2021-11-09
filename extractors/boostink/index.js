@@ -26,6 +26,6 @@ exports.bypass = function(url, cb) {
       }
     }
   }).catch(function(err) {
-
+    cb(err, null);
   })
 }

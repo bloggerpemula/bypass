@@ -101,14 +101,19 @@ exports.bypass = function(obj, cb) {
                   cb("No redirects found.")
                 }
               }).catch(function(err) {
+                console.log("at 3rd")
                 cb(err, null);
               });
             }
           }).catch(function(err) {
+            console.log("at 2nd")
             cb(err, null);
           });
         }
       });
+    }).catch(function(err) {
+      console.log("at first")
+      cb(err, null);
     });
   }
 }

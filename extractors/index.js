@@ -16,6 +16,7 @@ const youtube = require("./youtube");
 const cpmlink = require("./cpmlink");
 const tooyul = require("./tooyul");
 const exe = require("./exe");
+const ml = require("./mylink");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -101,6 +102,11 @@ exports.bypass = function(obj, cb) {
     return;
     /*case "exe":
       exe.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;*/
+    /*case "mylink":
+      ml.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
     return;*/
@@ -214,6 +220,16 @@ exports.getType = function(link) {
         "site": "exe",
         "needsExternalCaptchaSolving": true
       };*/
+    case "mylink.cloud":
+    case "mylink.vc":
+    case "mylink.name":
+    case "mylink.cx":
+    case "mylink.st":
+    case "myl.li":
+      return {
+        "site": "mylink",
+        "needsExternalCaptchaSolving": true
+      }
     default:
       return {
         "site": "generic",

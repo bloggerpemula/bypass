@@ -21,7 +21,7 @@ exports.captcha = function(obj, cb) {
     ref: referer href,
     meta: {
       sitekey: sk,
-      type: "recaptcha"
+      type: "recaptcha", "hcaptcha"
     },
     service: {
       needed: true, 
@@ -33,24 +33,49 @@ exports.captcha = function(obj, cb) {
     case "anticaptcha":
       anticaptcha.setAPIKey(obj.service.key);
       anticaptcha.shutUp();
-      anticaptcha.solveRecaptchaV2Proxyless(obj.ref, obj.meta.sitekey).then(function(resp) {
-        cb(null, {
-          token: resp
+      if (obj.meta.type == "recaptcha") {
+        anticaptcha.solveRecaptchaV2Proxyless(obj.ref, obj.meta.sitekey).then(function(resp) {
+          cb(null, {
+            token: resp
+          });
+        }).catch(function(err) {
+          cb(err, null);
         });
-      }).catch(function(err) {
-        cb(err, null);
-      })
+      } else if (obj.meta.type == "hcaptcha") {
+        anticaptcha.solveHCaptchaProxyless(obj.ref, obj.meta.sitekey).then(function(resp) {
+          cb(null, {
+            token: resp
+          });
+        }).catch(function(err) {
+          cb(err, null);
+        });
+      } else {
+        cb("Unsupported CAPTCHA type.", null);
+      }
     return;
 
     case "2captcha":
       const tc = new two.Solver(obj.service.key);
-      tc.recaptcha(obj.meta.sitekey, obj.ref).then(function(resp) {
-        cb(null, {
-          token: resp
+      if (obj.meta.type == "recaptcha") {
+        tc.recaptcha(obj.meta.sitekey, obj.ref).then(function(resp) {
+          cb(null, {
+            token: resp.data
+          });
+        }).catch(function(err) {
+          cb(err, null);
         });
-      }).catch(function(err) {
-        cb(err, null);
-      });
+      } else if (obj.meta.type == "hcaptcha") {
+        tc.hcaptcha(obj.meta.sitekey, obj.ref).then(function(resp) {
+          cb(null, {
+            token: resp.data  
+          });
+        }).catch(function(err) {
+          cb(err, null);
+        });
+      } else {
+        cb("Unsupported CAPTCHA type.", null);
+      }
+      
     return;
 
     default:

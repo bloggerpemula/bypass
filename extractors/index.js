@@ -18,6 +18,8 @@ const tooyul = require("./tooyul");
 const exe = require("./exe");
 const ml = require("./mylink");
 const boostme = require("./boostme");
+const mboost = require("./mboost");
+const catcut = require("./catcut");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -111,8 +113,18 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;*/
+    case "catcut":
+      catcut.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
     case "boostme":
       boostme.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "mboost":
+      mboost.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -135,6 +147,7 @@ exports.getType = function(link) {
     case "up-to-down.net":
     case "link-to.net":
     case "direct-link.net":
+    case "linkvertise.download":
       return {
         "site": "linkvertise",
         "needsExternalCaptchaSolving": false
@@ -242,6 +255,16 @@ exports.getType = function(link) {
         "site": "boostme",
         "needsExternalCaptchaSolving": false
       };
+    case "mboost.me":
+      return {
+        "site": "mboost",
+        "needsExternalCaptchaSolving": false
+      }
+    case "catcut.net":
+      return {
+        "site": "catcut",
+        "needsExternalCaptchaSolving": true
+      }
     default:
       return {
         "site": "generic",

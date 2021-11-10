@@ -20,6 +20,8 @@ The true list of compatible sites always depends on the location, availablity, c
 - adf.ly (and all aliases adf.ly is currently using)
 - href.li
 - ``wpsafelink`` using sites (ps2gamer.com, saferoms.com)
+- catcut.net
+- mboost.me
 
 # Captcha-Required sites
 **Note**: These bypasses only work *if* the instance supports it.

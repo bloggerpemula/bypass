@@ -15,16 +15,16 @@ The true list of compatible sites always depends on the location, availablity, c
 - ity.im
 - tei.ai
 - tii.ai
-- adyou.me / adyou.co / adyou.ws / shortadd.com
+- adyou.me / adyou.co / adyou.ws 
 - tinyurl.is (not to be confused with tinyurl.com)
 - adf.ly (and all aliases adf.ly is currently using)
 - href.li
 - ``wpsafelink`` using sites (ps2gamer.com, saferoms.com)
-- catcut.net
-- mboost.me
 
 # Captcha-Required sites
 **Note**: These bypasses only work *if* the instance supports it.
 
 - ouo.io / ouo.press
 - cpmlink.net
+- catcut.net
+- mboost.me

@@ -199,10 +199,9 @@ exports.getType = function(link) {
     case "adyou.me":
     case "adyou.co":
     case "adyou.ws":
-    case "shortadd.com":
       return {
         "site": "adyoume",
-        "needsExternalCaptchaSolving": true
+        "needsExternalCaptchaSolving": false
       };
     case "ouo.io":
     case "ouo.press":

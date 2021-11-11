@@ -15,11 +15,17 @@ const tinyis = require("./tinyis");
 const youtube = require("./youtube");
 const cpmlink = require("./cpmlink");
 const tooyul = require("./tooyul");
-const exe = require("./exe");
-const ml = require("./mylink");
+//const exe = require("./exe");
+//const ml = require("./mylink");
 const boostme = require("./boostme");
 const mboost = require("./mboost");
 const catcut = require("./catcut");
+const sub2get = require("./sub2get");
+const reko = require("./rekonise");
+const lb = require("./letsboost");
+const s4u = require("./sub4unlock");
+const sfu = require("./subforunlock");
+const al = require("./aylink");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -128,6 +134,36 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
+    case "sub2get":
+      sub2get.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "rekonise":
+      reko.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "letsboost":
+      lb.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "sub4":
+      s4u.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "subfor":
+      sfu.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    /*case "aylink":
+      al.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;*/
     default:
       cb("No valid site specified.", null);
     return;
@@ -258,12 +294,43 @@ exports.getType = function(link) {
       return {
         "site": "mboost",
         "needsExternalCaptchaSolving": false
-      }
+      };
     case "catcut.net":
       return {
         "site": "catcut",
         "needsExternalCaptchaSolving": true
-      }
+      };
+    case "sub2get.com":
+      return {
+        "site": "sub2get",
+        "needsExternalCaptchaSolving": false
+      };
+    case "rekonise.com":
+      return {
+        "site": "rekonise",
+        "needsExternalCaptchaSolving": false
+      };
+    case "letsboost.net":
+      return {
+        "site": "letsboost",
+        "needsExternalCaptchaSolving": false
+      };
+    case "sub4unlock.com":
+    case "shorte.be":
+      return {
+        "site": "sub4",
+        "needsExternalCaptchaSolving": false
+      };
+    case "subforunlock.com":
+      return {
+        "site": "subfor",
+        "needsExternalCaptchaSolving": false
+      };
+    /*case "aylink.co":
+      return {
+        "site": "aylink",
+        "needsExternalCaptchaSolving": false
+      };*/
     default:
       return {
         "site": "generic",

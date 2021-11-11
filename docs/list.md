@@ -33,3 +33,9 @@ The true list of compatible sites always depends on the location, availablity, c
 - cpmlink.net
 - catcut.net
 - mboost.me
+
+# TBA
+These sites are working on being added, although they don't currently work.
+- aylink.co
+- mylink.cloud / mylink.vc / mylink.name / mylink.cx / mylink.st / myl.li
+- exe.io / exey.io

@@ -109,11 +109,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
-    case "exe":
+    /*case "exe":
       exe.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
-    return;
+    return;*/
     /*case "mylink":
       ml.bypass(obj, function(err, resp) {
         cb(err, resp);
@@ -184,6 +184,7 @@ exports.getType = function(link) {
     case "link-to.net":
     case "direct-link.net":
     case "linkvertise.download":
+    case "file-link.net":
       return {
         "site": "linkvertise",
         "needsExternalCaptchaSolving": false
@@ -268,12 +269,12 @@ exports.getType = function(link) {
         "site": "tooyul",
         "needsExternalCaptchaSolving": false
       };
-    case "exe.io":
+    /*case "exe.io":
     case "exey.io":
       return {
         "site": "exe",
         "needsExternalCaptchaSolving": true
-      };
+      };*/
     /*case "mylink.cloud":
     case "mylink.vc":
     case "mylink.name":

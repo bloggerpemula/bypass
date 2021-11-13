@@ -15,7 +15,7 @@ const tinyis = require("./tinyis");
 const youtube = require("./youtube");
 const cpmlink = require("./cpmlink");
 const tooyul = require("./tooyul");
-//const exe = require("./exe");
+const exe = require("./exe");
 //const ml = require("./mylink");
 const boostme = require("./boostme");
 const mboost = require("./mboost");
@@ -109,11 +109,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
-    /*case "exe":
+    case "exe":
       exe.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
-    return;*/
+    return;
     /*case "mylink":
       ml.bypass(obj, function(err, resp) {
         cb(err, resp);
@@ -268,12 +268,12 @@ exports.getType = function(link) {
         "site": "tooyul",
         "needsExternalCaptchaSolving": false
       };
-    /*case "exe.io":
+    case "exe.io":
     case "exey.io":
       return {
         "site": "exe",
         "needsExternalCaptchaSolving": true
-      };*/
+      };
     /*case "mylink.cloud":
     case "mylink.vc":
     case "mylink.name":

@@ -3,7 +3,7 @@ const u = require("url");
 
 exports.bypass = function(url, cb) {
   if (u.parse(url, true).host == "linkvertise.download") {
-    var i = u.parse(url, true).pathname.split("/").slice(2, 4).join("/") + "/";
+    var i = "/" + u.parse(url, true).pathname.split("/").slice(2, 4).join("/");
   } else {
     var i = u.parse(url, true).pathname.split("/").slice(0, 3).join("/");
   }

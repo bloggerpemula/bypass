@@ -18,9 +18,9 @@ exports.bypass = function(url, cb) {
       if (
         $("script")[c] !== undefined &&
         $("script")[c].attribs !== undefined && 
-        $("script")[c].attribs.version !== undefined
+        $("script")[c].attribs["kekw"] !== undefined
       ) { 
-        cb(null, Buffer.from($("script")[c].attribs.version, "base64").toString("ascii"));
+        cb(null, Buffer.from($("script")[c].attribs["kekw"], "base64").toString("ascii"));
       } else {
         continue;
       }

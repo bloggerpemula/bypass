@@ -25,7 +25,8 @@ const reko = require("./rekonise");
 const lb = require("./letsboost");
 const s4u = require("./sub4unlock");
 const sfu = require("./subforunlock");
-const al = require("./aylink");
+//const al = require("./aylink");
+const cutwin = require("./cutwin");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -160,10 +161,15 @@ exports.bypass = function(obj, cb) {
       });
     return;
     /*case "aylink":
-      al.bypass(obj.url, function(err, resp) {
+      al.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
     return;*/
+    case "cutwin":
+      cutwin.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
     default:
       cb("No valid site specified.", null);
     return;
@@ -332,6 +338,12 @@ exports.getType = function(link) {
         "site": "aylink",
         "needsExternalCaptchaSolving": false
       };*/
+    case "cutw.in": 
+    //https://cutw.in/EEghr
+      return {
+        "site": "cutwin",
+        "needsExternalCaptchaSolving": true
+      };
     default:
       return {
         "site": "generic",

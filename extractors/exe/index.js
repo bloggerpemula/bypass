@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const scp = require("set-cookie-parser");
 const utils = require("../.utils");
 
-// tba
+// tba - stuck in a loop
 
 exports.bypass = function(obj, cb) {
   if (obj.url.includes("exe.io")) {obj.url = obj.url.replace("exe.io", "exey.io");}

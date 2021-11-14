@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 const utils = require("../.utils");
 const u = require("url");
 
-// tba
+// tba - still being written
 
 exports.bypass = function(obj, cb) {
   var r = u.parse(obj.url, true);

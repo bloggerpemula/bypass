@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const scp = require("set-cookie-parser");
 const utils = require("../.utils");
 
-// tba
+// tba - cant get around /get/tk
 
 exports.bypass = function(url, cb) {
   got(url, {

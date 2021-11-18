@@ -15,12 +15,18 @@ exports.bypass = function(url, cb) {
   }).then(function(resp) {
     var $ = cheerio.load(resp.body);
     var l = [];
-    for (var c in $(".pkAuV a")) {
-      if ($(".pkAuV a")[c] !== undefined && $(".pkAuV a")[c].attribs !== undefined && $(".pkAuV a")[c].attribs.href !== undefined) {
-        l.push($(".pkAuV a")[c].attribs.href);
+    for (var c in $(".sc-eCssSg")) {
+      if ($(".sc-eCssSg")[c] !== undefined && $(".sc-eCssSg")[c].attribs !== undefined && $(".sc-eCssSg")[c].attribs.href !== undefined) {
+        if ($(".sc-eCssSg")[c].attribs.href == "https://linktr.ee/") {continue}
+        l.push($(".sc-eCssSg")[c].attribs.href);
       } else {
         continue;
       }
+    }
+    var j = resp.body.split(`<script id="__NEXT_DATA__" type="application/json" crossorigin="anonymous">`)[1].split(`</script>`)[0];
+    j = JSON.parse(j);
+    for (var c in j.props.pageProps.links) {
+      l.push(j.props.pageProps.links[c].url);
     }
     cb(null, l);
   }).catch(function(err) {

@@ -1,3 +1,4 @@
+const e = require("express");
 const express = require("express");
 const app = express();
 const fs = require("fs");
@@ -47,10 +48,17 @@ app.get("/api/bypass", function(req, res) {
               destination: resp
             });
           } else if (typeof resp == "object") {
-            res.send({
-              success: true,
-              destinations: resp
-            });
+            if (resp.length > 1) {
+              res.send({
+                success: true,
+                destinations: resp
+              });
+            } else {
+              res.send({
+                success: true,
+                destination: resp[0]
+              });
+            }
           } else {
             res.send({
               success: false,

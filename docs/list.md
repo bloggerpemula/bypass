@@ -37,6 +37,7 @@ The true list of compatible sites always depends on the location, availablity, c
 # Non-adlink sites
 
 - linktr.ee
+- bio.link
 
 # TBA
 These sites are working on being added, although they don't currently work.

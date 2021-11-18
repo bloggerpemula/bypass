@@ -80,6 +80,9 @@ exports.bypass = function(url, cb) {
         a = JSON.parse(a);
         a = decodeURIComponent(a.safelink);
         cb(null, a);
+      } else if ($(".bl-logo-br").length > 0) {
+        var bl = require("../biolink");
+        bl.bypass(url, function(err, res) {cb(err, res);})
       } else {
         cb("No redirects found.", null);
       }

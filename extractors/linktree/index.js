@@ -13,20 +13,14 @@ exports.bypass = function(url, cb) {
       "Upgrade-Insecure-Requests": "1"
     }
   }).then(function(resp) {
-    var $ = cheerio.load(resp.body);
     var l = [];
-    for (var c in $(".sc-eCssSg")) {
-      if ($(".sc-eCssSg")[c] !== undefined && $(".sc-eCssSg")[c].attribs !== undefined && $(".sc-eCssSg")[c].attribs.href !== undefined) {
-        if ($(".sc-eCssSg")[c].attribs.href == "https://linktr.ee/") {continue}
-        l.push($(".sc-eCssSg")[c].attribs.href);
-      } else {
-        continue;
-      }
-    }
     var j = resp.body.split(`<script id="__NEXT_DATA__" type="application/json" crossorigin="anonymous">`)[1].split(`</script>`)[0];
     j = JSON.parse(j);
     for (var c in j.props.pageProps.links) {
       l.push(j.props.pageProps.links[c].url);
+    }
+    for (var c in j.props.pageProps.socialLinks) {
+      l.push(j.props.pageProps.socialLinks[c].url);
     }
     cb(null, l);
   }).catch(function(err) {

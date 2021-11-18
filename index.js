@@ -35,14 +35,28 @@ app.get("/api/bypass", function(req, res) {
           key: config.externalCaptchaProvider.key
         }
       }, function(err, resp) {
-        if (err && err !== null) {res.send({
-          success: false,
-          err: err.stack || err.message || err
-        });} else {
+        if (err && err !== null) {
           res.send({
-            success: true,
-            destination: resp
+            success: false,
+            err: err.stack || err.message || err
           });
+        } else {
+          if (typeof resp == "string") {
+            res.send({
+              success: true,
+              destination: resp
+            });
+          } else if (typeof resp == "object") {
+            res.send({
+              success: true,
+              destinations: resp
+            });
+          } else {
+            res.send({
+              success: false,
+              err: "Recieved invalid response from backend."
+            });
+          }
         }
       })
     }

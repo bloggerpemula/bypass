@@ -19,10 +19,12 @@ body {
   border-radius:4px;
 }
 
-#success {
+#success-one, 
+#success-mult {
   border-radius:4px;
   background:#43ff43;
   padding:10px;
+  margin-top:5px;
   color:black;
   word-wrap:break-word;
 }
@@ -39,8 +41,14 @@ body {
   margin-top:7.5px;
 }
 
-#success p, #error p {
+#success-one p, 
+#success-mult p,
+#error p {
   margin:0;
+}
+
+#links a {
+  margin-right:0.5vw;
 }
 
 .bp-btn {

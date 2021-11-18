@@ -27,6 +27,7 @@ const s4u = require("./sub4unlock");
 const sfu = require("./subforunlock");
 //const al = require("./aylink");
 const cutwin = require("./cutwin");
+const ltree = require("./linktree")
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -167,6 +168,11 @@ exports.bypass = function(obj, cb) {
     return;*/
     case "cutwin":
       cutwin.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "linktree":
+      ltree.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -344,6 +350,11 @@ exports.getType = function(link) {
         "site": "cutwin",
         "needsExternalCaptchaSolving": true
       };
+    case "linktr.ee":
+      return {
+        "site": "linktree",
+        "needsExternalCaptchaSolving": true
+      }
     default:
       return {
         "site": "generic",

@@ -34,8 +34,14 @@ The true list of compatible sites always depends on the location, availablity, c
 - catcut.net
 - mboost.me
 
+# Non-adlink sites
+
+- linktr.ee
+
 # TBA
 These sites are working on being added, although they don't currently work.
+
 - aylink.co
 - mylink.cloud / mylink.vc / mylink.name / mylink.cx / mylink.st / myl.li
 - exe.io / exey.io
+- cutw.in

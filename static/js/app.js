@@ -3,9 +3,16 @@ if (window.location.hash !== "#" && window.location.hash !== "") {
 }
 
 function bypass() {
-  document.getElementById("success").style.display = "none";
+  document.getElementById("success-one").style.display = "none";
+  document.getElementById("success-mult").style.display = "none";
   document.getElementById("error").style.display = "none";
   document.getElementById("load").style.display = "";
+  document.querySelectorAll("#links a").forEach(function(ele) {
+    ele.remove();
+  });
+  document.querySelectorAll("#links br").forEach(function(ele) {
+    ele.remove();
+  });
   var url = btoa(document.getElementById("url").value);
   var xhr = new XMLHttpRequest();
   xhr.open(`GET`, `/api/bypass?url=${url}`);
@@ -15,9 +22,20 @@ function bypass() {
       var json = JSON.parse(xhr.responseText);
       if (json.success) {
         document.getElementById("load").style.display = "none";
-        document.getElementById("success").style.display = "";
-        document.getElementById("link").href = json.destination;
-        document.getElementById("link").innerHTML = json.destination;
+        if (json.destination) {
+          document.getElementById("success-one").style.display = "";
+          document.getElementById("link").href = json.destination;
+          document.getElementById("link").innerHTML = json.destination;
+        } else if (json.destinations) {
+          document.getElementById("success-mult").style.display = "";
+          for (var c in json.destinations) {
+            var a = document.createElement("A");
+            a.href = json.destinations[c];
+            a.innerHTML = json.destinations[c];
+            document.getElementById("links").append(a);
+            document.getElementById("links").append(document.createElement("BR"));
+          }
+        }
       } else {
         document.getElementById("load").style.display = "none";
         document.getElementById("error").style.display = "";

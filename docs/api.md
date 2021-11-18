@@ -19,6 +19,17 @@ Successful response with one link.
 }
 ```
 
+Successful response with more than one link
+```json
+{
+  "success": true,
+  "destinations": [
+    "https://git.files.gay/tacohitbox/bypass-it-for-me",
+    "https://tacohitbox.com"
+  ]
+}
+```
+
 Error response.
 
 ```json

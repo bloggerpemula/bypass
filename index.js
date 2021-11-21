@@ -21,6 +21,11 @@ app.get("/api/bypass", function(req, res) {
   var u = url.parse(req.url, true);
   if (u.query.url) {
     var requestedUrl = Buffer.from(u.query.url, "base64").toString("ascii");
+    if (u.query.pass) {
+      var pass = Buffer.from(u.query.pass, "base64").toString("ascii");
+    } else {
+      var pass = null;
+    }
     if (extractors.getType(requestedUrl).needsExternalCaptchaSolving == true && config.externalCaptchaProvider.active == false) {
       res.send({
         success: false,
@@ -30,6 +35,7 @@ app.get("/api/bypass", function(req, res) {
       extractors.bypass({
         url: requestedUrl,
         site: extractors.getType(requestedUrl).site,
+        password: pass,
         captcha: {
           needed: extractors.getType(requestedUrl).needsExternalCaptchaSolving,
           service: config.externalCaptchaProvider.service,
@@ -53,10 +59,15 @@ app.get("/api/bypass", function(req, res) {
                 success: true,
                 destinations: resp
               });
-            } else {
+            } else if (resp.length == 1) {
               res.send({
                 success: true,
                 destination: resp[0]
+              });
+            } else {
+              res.send({
+                success: false,
+                err: "Recieved invalid response from backend."
               });
             }
           } else {
@@ -66,9 +77,8 @@ app.get("/api/bypass", function(req, res) {
             });
           }
         }
-      })
+      });
     }
-    
   } else {
     res.send({
       success: false,

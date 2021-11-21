@@ -14,8 +14,14 @@ function bypass() {
     ele.remove();
   });
   var url = btoa(document.getElementById("url").value);
+  if (document.getElementById("has-pw").checked == true) {
+    var pw = btoa(document.getElementById("pw").value);
+    var u = `/api/bypass?url=${url}&pass=${pw}`;
+  } else {
+    var u = `/api/bypass?url=${url}`;
+  }
   var xhr = new XMLHttpRequest();
-  xhr.open(`GET`, `/api/bypass?url=${url}`);
+  xhr.open(`GET`, u);
   xhr.send();
   xhr.onload = function() {
     try {
@@ -74,4 +80,12 @@ function bypass() {
 function thisone() {
   document.getElementById("url").value = document.getElementById("link").href;
   bypass(); 
+}
+
+function togglePw(c) {
+  if (c == true) {
+    document.getElementById("pw").style.display = "inline-block";
+  } else {
+    document.getElementById("pw").style.display = "none";
+  }
 }

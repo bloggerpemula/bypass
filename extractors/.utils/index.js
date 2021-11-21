@@ -49,6 +49,14 @@ exports.captcha = function(obj, cb) {
         }).catch(function(err) {
           cb(err, null);
         });
+      } else if (obj.meta.type == "image") {
+        anticaptcha.solveImage(obj["meta"]["image"]).then(function(resp) {
+          cb(null, {
+            token: resp  
+          });
+        }).catch(function(err) {
+          cb(err, null);
+        })
       } else {
         cb("Unsupported CAPTCHA type.", null);
       }
@@ -72,14 +80,31 @@ exports.captcha = function(obj, cb) {
         }).catch(function(err) {
           cb(err, null);
         });
+      } else if (obj.meta.type == "image") {
+        tc.imageCaptcha(obj["meta"]["image"], obj["meta"]["options"]).then(function(resp) {
+          cb(null, {
+            data: resp.data  
+          })
+        }).catch(function(err) {
+          cb(err, null);
+        });
       } else {
         cb("Unsupported CAPTCHA type.", null);
       }
-      
     return;
 
     default:
       cb("Captcha service is not yet supported.", null);
     return;
+  }
+}
+
+exports.supportedCaptcha = function(n) {
+  switch(n) {
+    case "2captcha":
+    case "anticaptcha":
+      return true;
+    default:
+      return false;
   }
 }

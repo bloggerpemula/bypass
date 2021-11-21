@@ -19,6 +19,12 @@ body {
   border-radius:4px;
 }
 
+#pw {
+  border-radius:4px;
+  height:24px;
+  padding:1px 4px;
+}
+
 #success-one, 
 #success-mult {
   border-radius:4px;

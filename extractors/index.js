@@ -29,9 +29,15 @@ const sfu = require("./subforunlock");
 const cutwin = require("./cutwin");
 const ltree = require("./linktree");
 const bio = require("./biolink");
+const tf = require("./thinfi");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
+    case "generic":
+      generic.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
     case "adshrink":
       adshrink.bypass(obj.url, function(err, resp) {
         cb(err, resp);
@@ -39,11 +45,6 @@ exports.bypass = function(obj, cb) {
     return;
     case "linkvertise":
       linkvertise.bypass(obj.url, function(err, resp) {
-        cb(err, resp);
-      });
-    return;
-    case "generic":
-      generic.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -104,11 +105,6 @@ exports.bypass = function(obj, cb) {
     return;
     case "cpmlink":
       cpmlink.bypass(obj, function(err, resp) {
-        cb(err, resp);
-      });
-    return;
-    case "tooyul":
-      tooyul.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -182,6 +178,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
+    case "thinfi": 
+      tf.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
     default:
       cb("No valid site specified.", null);
     return;
@@ -189,8 +190,9 @@ exports.bypass = function(obj, cb) {
 }
 
 exports.getType = function(link) {
-  var u = url.parse(link, true);
-  switch(u.host) {
+  var u = url.parse(link, true).host;
+  if (u.split(".")[0] == "www") {u = u.substring(4);}
+  switch(u) {
     case "adshrink.it":
       return {
         "site": "adshrink",
@@ -207,22 +209,18 @@ exports.getType = function(link) {
         "site": "linkvertise",
         "needsExternalCaptchaSolving": false
       };
-    case "www.shortly.xyz":
     case "shortly.xyz":
       return {
         "site": "shortly",
         "needsExternalCaptchaSolving": false
       }
     case "sub2unlock.com":
-    case "www.sub2unlock.com":
     case "sub2unlock.net":
-    case "www.sub2unlock.net":
       return {
         "site": "sub2unlock",
         "needsExternalCaptchaSolving": false
       };
     case "shortconnect.com":
-    case "www.shortconnect.com":
       return {
         "site": "shortconnect",
         "needsExternalCaptchaSolving": false
@@ -272,7 +270,6 @@ exports.getType = function(link) {
     case "yt.be":
     case "youtu.be":
     case "youtube.com":
-    case "www.youtube.com":
       return {
         "site": "youtube",
         "needsExternalCaptchaSolving": false
@@ -281,11 +278,6 @@ exports.getType = function(link) {
       return {
         "site": "cpmlink",
         "needsExternalCaptchaSolving": true
-      };
-    case "tooyul.co":
-      return {
-        "site": "tooyul",
-        "needsExternalCaptchaSolving": false
       };
     /*case "exe.io":
     case "exey.io":
@@ -359,12 +351,17 @@ exports.getType = function(link) {
     case "linktr.ee":
       return {
         "site": "linktree",
-        "needsExternalCaptchaSolving": true
+        "needsExternalCaptchaSolving": false
       };
     case "bio.link": 
       return {
         "site": "biolink",
-        "needsExternalCaptchaSolving": true
+        "needsExternalCaptchaSolving": false
+      };
+    case "thinfi.com":
+      return {
+        "site": "thinfi",
+        "needsExternalCaptchaSolving": false
       };
     default:
       return {

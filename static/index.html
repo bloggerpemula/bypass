@@ -12,8 +12,13 @@
       <p class="nm">Bypass adlinks and tracking with BIFM.</p>
     </div>
     <div class="rs">
-      <input placeholder="Enter the wanted URL here." id="url"> 
-      <button class="bp-btn" onclick="bypass();">Bypass</button>
+      <input placeholder="Enter the wanted URL here." id="url" autocomplete="off">
+      <button class="bp-btn" onclick="bypass();">Bypass</button><br>
+      <div style="margin-top:5px;margin-bottom:5px;">
+        <label for="hpw">Password?</label>
+        <input type="checkbox" id="has-pw" name="hpw" oninput="togglePw(this.checked)" autocomplete="off">
+        <input type="password" id="pw" name="pw" placeholder="Password" style="display:none;">
+      </div>
       <div id="load" style="display:none;">
         <div>
           <div class="lds-facebook"><div></div><div></div><div></div></div>

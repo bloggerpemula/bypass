@@ -24,5 +24,5 @@ exports.bypass = function(url, cb) {
     cb(null, $("#skip-btn").attr("href"));
   }).catch(function(err) {
     cb(err, null);
-  })
+  });
 }

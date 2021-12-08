@@ -21,6 +21,7 @@ exports.bypass = function(url, cb) {
       "TE": "Trailers"
     }
   }).then(function(resp) {
+    if (resp.headers["content-type"] == "text/html; charset=UTF-8") {cb("The link seems to not work.", null); return;}
     var s = Buffer.from(JSON.stringify({
       timestamp: new Date() * 1,
       random: "6548307",

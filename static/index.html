@@ -25,7 +25,7 @@
         </div>
       </div>
       <div id="success-one" style="display:none;">
-        <p>Got link: <a id="link"></a></p><br>
+        <p>Got link: <a id="link" rel="noreferrer"></a></p><br>
         <button onclick="thisone();">Bypass this URL</button>
       </div>
       <div id="success-mult" style="display:none;">
@@ -34,6 +34,7 @@
       </div>
       <div id="error" style="display:none;">
         <p>An error has occured! <span style="color:red;" id="err-txt"></span></p>
+        <a id="og" target="_blank" rel="noreferrer">Open original link.</a>
       </div>
     </div>
     <p style="margin:5px 0;">This site is open sourced (<a href="https://git.files.gay/tacohitbox/bypass-it-for-me">source code</a>).</p>

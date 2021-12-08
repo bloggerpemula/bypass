@@ -43,9 +43,10 @@ function bypass() {
           }
         }
       } else {
+        document.getElementById("og").href = document.getElementById("url").value;
         document.getElementById("load").style.display = "none";
         document.getElementById("error").style.display = "";
-        if (json.err !== "" && json.err) {
+        if (json.err !== "" && json.err !== null && json.err) {
           document.getElementById("err-txt").innerHTML = json.err;
         } else {
           document.getElementById("err-txt").innerHTML = "An unspecified error has occurred. (Server error, no message)";

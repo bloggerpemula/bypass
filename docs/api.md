@@ -15,7 +15,7 @@ Successful response with one link.
 ```json
 {
   "success": true,
-  "destination": "https://git.files.gay/tacohitbox/bypass-it-for-me"
+  "destination": "https://git.files.gay/e/bypass-it-for-me"
 }
 ```
 
@@ -24,7 +24,7 @@ Successful response with more than one link
 {
   "success": true,
   "destinations": [
-    "https://git.files.gay/tacohitbox/bypass-it-for-me",
+    "https://git.files.gay/e/bypass-it-for-me",
     "https://tacohitbox.com"
   ]
 }

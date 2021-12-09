@@ -37,7 +37,11 @@ function bypass() {
           for (var c in json.destinations) {
             var a = document.createElement("A");
             a.href = json.destinations[c];
-            a.innerHTML = json.destinations[c];
+            if (json.destinations[c].startsWith("mailto:")) {
+              a.innerHTML = json.destinations[c].substring(7);
+            } else {
+              a.innerHTML = json.destinations[c];
+            }
             document.getElementById("links").append(a);
             document.getElementById("links").append(document.createElement("BR"));
           }

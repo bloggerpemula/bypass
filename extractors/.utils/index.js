@@ -108,3 +108,23 @@ exports.supportedCaptcha = function(n) {
       return false;
   }
 }
+
+exports.decodeCFEmail = function(a) {
+  var a = `/cdn-cgi/l/email-protection#${a}`;
+  var s = a.indexOf(`/cdn-cgi/l/email-protection`);
+  var m = a.length;
+
+  if (a && s > -1 && m > 28) {
+    var j = 28 + s;
+    var s = '';
+    if (j < m) {
+      r = '0x' + a.substr(j, 2) | 0;
+      for (j += 2; j < m && a.charAt(j) != 'X'; j += 2) s += '%' + ('0' + ('0x' + a.substr(j, 2) ^ r).toString(16)).slice(-2);
+      j++;
+      s = decodeURIComponent(s) + a.substr(j, m - j);
+    }
+    return s;
+  } else {
+    return null;
+  }
+}

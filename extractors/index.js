@@ -29,6 +29,7 @@ const cutwin = require("./cutwin");
 const ltree = require("./linktree");
 const bio = require("./biolink");
 const tf = require("./thinfi");
+const crd = require("./carrd");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -182,6 +183,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
+    case "carrd": 
+      crd.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
     default:
       cb("No valid site specified.", null);
     return;
@@ -191,6 +197,12 @@ exports.bypass = function(obj, cb) {
 exports.getType = function(link) {
   var u = url.parse(link, true).host;
   if (u.split(".")[0] == "www") {u = u.substring(4);}
+  if (u.split(".")[1] == "carrd" && u.split(".")[2] == "co") {
+    return {
+      "site": "carrd",
+      "needsExternalCaptchaSolving": false
+    };
+  }
   switch(u) {
     case "adshrink.it":
       return {

@@ -14,6 +14,10 @@ exports.bypass = function(url, cb) {
     }
   }).then(function(resp) {
     var $ = cheerio.load(resp.body);
+    // sorry for party rockin
+    // in all seriousness, i wouldn't have a problem with your site enough to make this if you didn't use
+    // invasive popup ads on your site, or make it possible to use this site without javascript.
+    // idk if you even mean mine or universal bypass tbh
     for (var c in $("script")) {
       if (
         $("script")[c] !== undefined &&

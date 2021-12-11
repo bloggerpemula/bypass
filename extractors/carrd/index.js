@@ -22,7 +22,7 @@ exports.bypass = function(url, cb) {
           if ($("a")[c].attribs["data-cfemail"]) {
             l.push(`mailto:${utils.decodeCFEmail($("a")[c].attribs["data-cfemail"])}`);
           } else {
-            if ($("a")[c].attribs.href.startsWith("#") || $("a")[c].attribs.href == "https://carrd.co") {continue;}
+            if ($("a")[c].attribs.href.startsWith("#") || $("a")[c].attribs.href == "https://carrd.co" || $("a")[c].attribs.href == "https://carrd.co/build?ref=auto") {continue;}
             l.push($("a")[c].attribs.href);
           } 
         }

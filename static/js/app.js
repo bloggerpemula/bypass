@@ -36,6 +36,7 @@ function bypass() {
           document.getElementById("success-mult").style.display = "";
           for (var c in json.destinations) {
             var a = document.createElement("A");
+            if (json.destinations[c] == null) {continue;}
             a.href = json.destinations[c];
             if (json.destinations[c].startsWith("mailto:")) {
               a.innerHTML = json.destinations[c].substring(7);

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AutoGo - BypassItForMe</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/load.css" rel="stylesheet">
+    <meta name="viewport" content="width=devide-width, inital-scale=1.0">
+  </head>
+  <body onhashchange="window.location.reload()">
+    <noscript>
+      <p>This page requires Javascript.</p>
+    </noscript>
+    <div id="loading" style="display:none;">
+      <div class="lds-facebook"><div></div><div></div><div></div></div>
+    </div>
+    <div id="loaded-one" style="display:none;">
+      <p>Redirecting...</p>
+    </div>
+    <div id="loaded-mult" style="display:none;"></div>
+    <div id="error" style="display:none;color:red;"></div>
+    <script src="/js/ag.js"></script>
+  </body>
+</html>

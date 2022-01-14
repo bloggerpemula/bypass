@@ -28,6 +28,7 @@ exports.bypass = function(obj, cb) {
           continue;
         }
       }
+      if (typeof sk !== "string") {cb("The link seems to be dead.", null); return;}
       utils.captcha({
         ref: obj.url,
         meta: {

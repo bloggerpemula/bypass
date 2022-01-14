@@ -108,11 +108,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
-    /*case "exe":
+    case "exe":
       exe.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
-    return;*/
+    return;
     /*case "mylink":
       ml.bypass(obj, function(err, resp) {
         cb(err, resp);
@@ -158,11 +158,11 @@ exports.bypass = function(obj, cb) {
         cb(err, resp);
       });
     return;
-    /*case "aylink":
+    case "aylink":
       al.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
-    return;*/
+    return;
     case "cutwin":
       cutwin.bypass(obj, function(err, resp) {
         cb(err, resp);

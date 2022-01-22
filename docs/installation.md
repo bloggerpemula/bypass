@@ -5,7 +5,7 @@ This guide assumes you have Node, NPM, and Git installed and working on your sys
 Setup is really simple on your server. You only need to run a few commands in your terminal.
 
 ```
-git clone https://git.gay/a/bypass-it-for-me
+git clone http://github.com/tacohitbox/bypass-it-for-me
 cd bypass-it-for-me
 npm i 
 node .

@@ -30,6 +30,7 @@ const ltree = require("./linktree");
 const bio = require("./biolink");
 const tf = require("./thinfi");
 const crd = require("./carrd");
+const upto = require("./uptolink");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -185,6 +186,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "carrd": 
       crd.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "upto":
+      upto.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -374,6 +380,12 @@ exports.getType = function(link) {
         "site": "thinfi",
         "needsExternalCaptchaSolving": false
       };
+    case "uptolink1.com":
+    case "uptoolink.org":
+      return {
+        "site": "upto",
+        "needsExternalCaptchaSolving": false
+      }
     default:
       return {
         "site": "generic",

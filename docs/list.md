@@ -24,6 +24,7 @@ The true list of compatible sites always depends on the location, availablity, c
 - letsboost.net
 - sub4unlock.com / shorte.be
 - subforunlock.com
+- uptolink1.com / uptoolink.org
 - ``wpsafelink`` using sites (ps2gamer.com, saferoms.com)
 - ``Daddy's Link Protector`` (captcha'd links don't work)
 

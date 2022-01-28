@@ -18,18 +18,17 @@ app.listen(config.port, function() {
 app.use(express.static(`${__dirname}/static/`));
 
 app.get("/api/bypass", function(req, res) {
-  var u = url.parse(req.url, true);
-  if (u.query.url) {
-    var requestedUrl = Buffer.from(u.query.url, "base64").toString("ascii");
-    if (u.query.pass) {
-      var pass = Buffer.from(u.query.pass, "base64").toString("ascii");
+  if (req.query.url) {
+    var requestedUrl = Buffer.from(req.query.url, "base64").toString("ascii");
+    if (req.query.pass) {
+      var pass = Buffer.from(req.query.pass, "base64").toString("ascii");
     } else {
       var pass = null;
     }
     if (extractors.getType(requestedUrl).needsExternalCaptchaSolving == true && config.externalCaptchaProvider.active == false) {
       res.send({
         success: false,
-        err: "This type of link is not supported by this instance."
+        err: "This bypass requires a CAPTCHA, but this instance doesn't support them."
       });
     } else {
       extractors.bypass({

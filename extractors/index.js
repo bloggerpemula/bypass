@@ -222,6 +222,7 @@ exports.getType = function(link) {
     case "direct-link.net":
     case "linkvertise.download":
     case "file-link.net":
+    case "link-cetner.net":
       return {
         "site": "linkvertise",
         "needsExternalCaptchaSolving": false

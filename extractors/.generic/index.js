@@ -174,7 +174,7 @@ function cont(url, resp, obj, cb) {
             }
           });
         } else {
-          cb("This bypass requires a CAPTCHA, but this instance doesn't support them.", null);
+          cb("This bypass requires a CAPTCHA solver, but this instance doesn't support them.", null);
         }
       } else {
         if (obj.password == null) {

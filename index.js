@@ -28,7 +28,7 @@ app.get("/api/bypass", function(req, res) {
     if (extractors.getType(requestedUrl).needsExternalCaptchaSolving == true && config.externalCaptchaProvider.active == false) {
       res.send({
         success: false,
-        err: "This bypass requires a CAPTCHA, but this instance doesn't support them."
+        err: "This bypass requires a CAPTCHA solver, but this instance doesn't support them."
       });
     } else {
       extractors.bypass({

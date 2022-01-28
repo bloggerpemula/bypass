@@ -82,8 +82,9 @@ function isUrl(url) {
 
 function cont(url, resp, obj, cb) {
   if (resp.headers.location) {
-    if (resp.url.includes("//adf.ly")) {
-      require(".").bypass(resp.headers.location, function(err, res) {
+    if (resp.url.includes("//adf.ly") || resp.url.includes("tinyurl.com/") && resp.headers.location.includes("preview.tinyurl.com")) {
+      obj.url = resp.headers.location;
+      require(".").bypass(obj, function(err, res) {
         if (err) {
           cb(null, resp.headers.location);
         } else {
@@ -92,7 +93,8 @@ function cont(url, resp, obj, cb) {
       });
     } else {
       if (resp.headers.location == `${url}/`) {
-        require(".").bypass(resp.headers.location, function(err, res) {
+        obj.url = resp.headers.location;
+        require(".").bypass(obj, function(err, res) {
           if (err) {
             cb(null, resp.headers.location);
           } else {
@@ -102,7 +104,7 @@ function cont(url, resp, obj, cb) {
       } else {
         cb(null, resp.headers.location);
       }
-    }
+    } 
   } else if (resp.body.includes(`content="0;URL=`)) {
     cb(null, resp.body.split(`content="0;URL=`)[1].split(`"`)[0]);
   } else {
@@ -213,7 +215,10 @@ function cont(url, resp, obj, cb) {
           });
         }
       }
+    } else if ($("#redirecturl").length > 0) {
+      cb(null, $("#redirecturl").attr("href"));
     } else {
+      console.log(resp);
       cb("No redirects found.", null);
     }
   }

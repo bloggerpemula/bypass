@@ -218,7 +218,6 @@ function cont(url, resp, obj, cb) {
     } else if ($("#redirecturl").length > 0) {
       cb(null, $("#redirecturl").attr("href"));
     } else {
-      console.log(resp);
       cb("No redirects found.", null);
     }
   }

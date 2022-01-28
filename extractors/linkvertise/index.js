@@ -67,7 +67,6 @@ exports.bypass = function(url, cb) {
             cb("Invalid type of link, not URL.", null);
           }
         }).catch(function(err) {
-          console.log(err.response)
           cb(err, null);
         });
       }

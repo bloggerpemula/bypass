@@ -19,7 +19,6 @@ exports.bypass = function(obj, cb) {
         "Upgrade-Insecure-Requests": "1"
       }
     }).then(function(resp) {
-      console.log(resp.body)
       var $ = cheerio.load(resp.body);
       var cook = utils.cookieString(scp.parse(resp.headers["set-cookie"]));
       for (var c in $("head script")) {

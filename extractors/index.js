@@ -223,6 +223,7 @@ exports.getType = function(link) {
     case "linkvertise.download":
     case "file-link.net":
     case "link-center.net":
+    case "link-target.net":
       return {
         "site": "linkvertise",
         "needsExternalCaptchaSolving": false

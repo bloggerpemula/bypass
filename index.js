@@ -104,15 +104,18 @@ app.get("/api/bypass", async function(req, res) {
             if (config["db"]["enable"] && req.query.allowCache !== "false") {
               const db = client.db("bifm");
               const cl = db.collection("links");
-              p = pw;
-              if (p == undefined) p = false;
-              cl.insertOne({
-                url: requestedUrl,
-                response: resp,
-                date: new Date().toTimeString(),
-                hadPassword: p,
-                password: pass
-              });
+              const f = await cl.find({url: requestedUrl}).toArray();
+              if (!f[0]) {
+                p = pw;
+                if (p == undefined) p = false;
+                cl.insertOne({
+                  url: requestedUrl,
+                  response: resp,
+                  date: new Date().toTimeString(),
+                  hadPassword: p,
+                  password: pass
+                });
+              }
             }
             res.send({
               success: true,
@@ -123,15 +126,18 @@ app.get("/api/bypass", async function(req, res) {
             if (config["db"]["enable"] && req.query.allowCache !== "false") {
               const db = client.db("bifm");
               const cl = db.collection("links");
-              p = pw;
-              if (p == undefined) p = false;
-              cl.insertOne({
-                url: requestedUrl,
-                response: resp,
-                date: new Date().toTimeString(),
-                hadPassword: p,
-                password: pass
-              });
+              const f = await cl.find({url: requestedUrl}).toArray();
+              if (!f[0]) {
+                p = pw;
+                if (p == undefined) p = false;
+                cl.insertOne({
+                  url: requestedUrl,
+                  response: resp,
+                  date: new Date().toTimeString(),
+                  hadPassword: p,
+                  password: pass
+                });
+              }
             }
             if (resp.length > 1) {
               res.send({

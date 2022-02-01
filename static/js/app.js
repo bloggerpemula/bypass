@@ -7,6 +7,7 @@ xhr.onload = function() {
 
 if (window.location.hash !== "#" && window.location.hash !== "") {
   document.getElementById("url").value = window.location.hash.substring(1);
+  bypass();
 }
 
 function bypass(incorrect) {

@@ -105,7 +105,7 @@ app.get("/api/bypass", async function(req, res) {
               const db = client.db("bifm");
               const cl = db.collection("links");
               const f = await cl.find({url: requestedUrl}).toArray();
-              if (!f[0]) {
+              if (!f[0] || req.query.incorrectCache == "true") {
                 p = pw;
                 if (p == undefined) p = false;
                 cl.insertOne({
@@ -127,7 +127,7 @@ app.get("/api/bypass", async function(req, res) {
               const db = client.db("bifm");
               const cl = db.collection("links");
               const f = await cl.find({url: requestedUrl}).toArray();
-              if (!f[0]) {
+              if (!f[0] || req.query.incorrectCache == "true") {
                 p = pw;
                 if (p == undefined) p = false;
                 cl.insertOne({

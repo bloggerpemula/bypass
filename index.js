@@ -46,23 +46,25 @@ app.get("/api/bypass", async function(req, res) {
       const db = client.db("bifm");
       const cl = db.collection("links");
       const f = await cl.find({url: requestedUrl}).toArray();
-      if (f[0] && f[0].hadPassword == false || f[0].hadPassword == true && f[0].password == pass) {
-        if (typeof f[0].response == "object" && f[0].response.length > 1) {
-          res.send({
-            success: true,
-            cache: true,
-            destinations: f[0].response,
-            "cache-date": f[0].date
-          })
-        } else if (typeof f[0].response == "string" || typeof f[0].response == "object" && f[0].response.length == 1) {
-          res.send({
-            success: true,
-            cache: true,
-            destination: f[0].response,
-            "cache-date": f[0].date
-          })
+      if (f[0]) {
+        if (f[0].hadPassword == false || f[0].hadPassword == true && f[0].password == pass) {
+          if (typeof f[0].response == "object" && f[0].response.length > 1) {
+            res.send({
+              success: true,
+              cache: true,
+              destinations: f[0].response,
+              "cache-date": f[0].date
+            })
+          } else if (typeof f[0].response == "string" || typeof f[0].response == "object" && f[0].response.length == 1) {
+            res.send({
+              success: true,
+              cache: true,
+              destination: f[0].response,
+              "cache-date": f[0].date
+            })
+          }
+          return;
         }
-        return;
       }
     } else if (config["db"]["enable"] && req.query.incorrectCache == "true") {
       const db = client.db("bifm");

@@ -40,6 +40,7 @@ The true list of compatible sites always depends on the location, availablity, c
 
 - linktr.ee
 - bio.link
+- carrd.co
 
 # TBA
 These sites are working on being added, although they don't currently work.

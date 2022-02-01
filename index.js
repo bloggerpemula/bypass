@@ -93,7 +93,7 @@ app.get("/api/bypass", async function(req, res) {
           service: config.externalCaptchaProvider.service,
           key: config.externalCaptchaProvider.key
         }
-      }, function(err, resp, pw) {
+      }, async function(err, resp, pw) {
         if (err && err !== null) {
           res.send({
             success: false,

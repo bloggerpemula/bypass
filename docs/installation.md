@@ -20,7 +20,11 @@ The final command, ``node .``, generates a ``config.json`` file that configures 
     "service": "n/a",
     "key": "n/a"
   },
-  "port": 32333
+  "port": 32333,
+  "db": {
+    "enable": false,
+    "url": "mongodb://127.0.0.1:27017/bifm"
+  }
 }
 ```
 
@@ -31,3 +35,5 @@ Some sites need a Captcha solving service to work properly. Here's how you can s
 3. Set ``key`` in ``externalCaptchaProvider`` to your API key.
 
 You can also set your port in the ``port`` option.
+
+The ``db`` object is for caching results. Read more about it [here](./cache.md).

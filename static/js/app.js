@@ -1,11 +1,19 @@
+var xhr = new XMLHttpRequest();
+xhr.open(`GET`, `/cache-enabled`);
+xhr.send();
+xhr.onload = function() {
+  if (xhr.responseText == "true") document.getElementById("cache-enabled").style.display = "inline-block";
+}
+
 if (window.location.hash !== "#" && window.location.hash !== "") {
   document.getElementById("url").value = window.location.hash.substring(1);
 }
 
-function bypass() {
+function bypass(incorrect) {
   document.getElementById("success-one").style.display = "none";
   document.getElementById("success-mult").style.display = "none";
   document.getElementById("error").style.display = "none";
+  document.getElementById("incorrect-cache-btn").style.display = "none";
   document.getElementById("load").style.display = "";
   document.querySelectorAll("#links a").forEach(function(ele) {
     ele.remove();
@@ -14,11 +22,19 @@ function bypass() {
     ele.remove();
   });
   var url = btoa(document.getElementById("url").value);
+  var u = `/api/bypass?url=${url}`;
   if (document.getElementById("has-pw").checked == true) {
     var pw = btoa(document.getElementById("pw").value);
-    var u = `/api/bypass?url=${url}&pass=${pw}`;
-  } else {
-    var u = `/api/bypass?url=${url}`;
+    u = `${u}&pass=${pw}`;
+  } 
+  if (document.getElementById("igch").checked == true) {
+    u = `${u}&bypassCache=true`;
+  }
+  if (document.getElementById("dnch").checked == true) {
+    u = `${u}&allowCache=false`;
+  }
+  if (incorrect) {
+    u = `${u}&incorrectCache=true`;
   }
   var xhr = new XMLHttpRequest();
   xhr.open(`GET`, u);
@@ -28,6 +44,9 @@ function bypass() {
       var json = JSON.parse(xhr.responseText);
       if (json.success) {
         document.getElementById("load").style.display = "none";
+        if (json.cache) {
+          document.getElementById("incorrect-cache-btn").style.display = "inline-block";
+        }
         if (json.destination) {
           document.getElementById("success-one").style.display = "";
           document.getElementById("link").href = json.destination;

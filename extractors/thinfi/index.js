@@ -29,7 +29,7 @@ exports.bypass = function(obj, cb) {
   }).then(function(resp) {
     var $ = cheerio.load(resp.body);
     if ($("section a").attr("href") == resp.url) {cb("Your password was invalid.", null); return;}
-    cb(null, $("section a").attr("href"));
+    cb(null, $("section a").attr("href"), true);
   }).catch(function(err) {
     cb(err, null);
   });

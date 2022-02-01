@@ -17,7 +17,13 @@
       <div style="margin-top:5px;margin-bottom:5px;">
         <label for="hpw">Password?</label>
         <input type="checkbox" id="has-pw" name="hpw" oninput="togglePw(this.checked)" autocomplete="off">
-        <input type="password" id="pw" name="pw" placeholder="Password" style="display:none;">
+        <input type="password" id="pw" name="pw" placeholder="Password" style="display:none;"><br>
+        <div id="cache-enabled" style="display:none;">
+          <label for="igch">Ignore cache?</label>
+          <input type="checkbox" id="igch" name="igch" autocomplete="off"><br>
+          <label for="dnch">Don't cache response?</label>
+          <input type="checkbox" id="dnch" name="dnch" autocomplete="off">
+        </div>
       </div>
       <div id="load" style="display:none;">
         <div>
@@ -27,6 +33,7 @@
       <div id="success-one" style="display:none;">
         <p>Got link: <a id="link" rel="noreferrer"></a></p><br>
         <button onclick="thisone();">Bypass this URL</button>
+        <button id="incorrect-cache-btn" style="display: none;" onclick="bypass('y');">Incorrect link?</button>
       </div>
       <div id="success-mult" style="display:none;">
         <p>Got links:</p>

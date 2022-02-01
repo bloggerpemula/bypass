@@ -26,7 +26,7 @@ The true list of compatible sites always depends on the location, availablity, c
 - subforunlock.com
 - uptolink1.com / uptoolink.org
 - ``wpsafelink`` using sites (ps2gamer.com, saferoms.com)
-- ``Daddy's Link Protector`` (captcha'd links don't work)
+- ``Daddy's Link Protector`` (Captcha-protected links don't currently work)
 
 # Captcha-Required sites
 **Note**: These bypasses only work *if* the instance supports it.

@@ -4,5 +4,9 @@
     "service": "n/a",
     "key": "n/a"
   },
-  "port": 32333
+  "port": 32333,
+  "db": {
+    "enable": false,
+    "url": "mongodb://127.0.0.1:27017/bifm"
+  }
 }

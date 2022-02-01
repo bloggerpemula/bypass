@@ -209,7 +209,7 @@ function cont(url, resp, obj, cb) {
             for (var c in $("center p a")) {
               if ($("center p a")[c] !== undefined && $("center p a")[c].attribs !== undefined && $("center p a")[c].attribs.href !== undefined) {l.push($("center p a")[c].attribs.href);}
             }
-            cb(null, l);
+            cb(null, l, true);
           }).catch(function(err) {
             cb(err, null);
           });

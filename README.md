@@ -14,4 +14,4 @@ npm i
 node index # runs server on port 32333
 ```
 
-### [documentation](./docs/README.md) | [instances](./docs/instances.md)
+### [documentation](./docs/README.md) | [instances](./docs/instances.md) | [bypass examples](./docs/example.md)

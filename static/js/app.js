@@ -14,6 +14,7 @@ function bypass(incorrect) {
   document.getElementById("success-mult").style.display = "none";
   document.getElementById("error").style.display = "none";
   document.getElementById("incorrect-cache-btn").style.display = "none";
+  document.getElementById("incorrect-cache-btn-mult").style.display = "none";
   document.getElementById("load").style.display = "";
   document.querySelectorAll("#links a").forEach(function(ele) {
     ele.remove();
@@ -44,19 +45,24 @@ function bypass(incorrect) {
       var json = JSON.parse(xhr.responseText);
       if (json.success) {
         document.getElementById("load").style.display = "none";
-        if (json.cache) {
-          document.getElementById("incorrect-cache-btn").style.display = "inline-block";
-        }
+        
         if (json.destination) {
           document.getElementById("success-one").style.display = "";
           document.getElementById("link").href = json.destination;
           document.getElementById("link").innerHTML = json.destination;
+          if (json.cache) {
+            document.getElementById("incorrect-cache-btn").style.display = "inline-block";
+          }
         } else if (json.destinations) {
           document.getElementById("success-mult").style.display = "";
+          if (json.cache == true) {
+            document.getElementById("incorrect-cache-btn-mult").style.display = "inline-block";
+          }
           for (var c in json.destinations) {
             var a = document.createElement("A");
             if (json.destinations[c] == null) {continue;}
             a.href = json.destinations[c];
+            
             if (json.destinations[c].startsWith("mailto:")) {
               a.innerHTML = json.destinations[c].substring(7);
             } else {

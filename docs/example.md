@@ -11,7 +11,11 @@ All of these redirect to the repo you're at right now ([http://github.com/tacohi
 - **sh.st alias** - [http://corneey.com/eaQe3V](http://corneey.com/eaQe3V)
 - **thinfi.com** - [https://thinfi.com/079uy](https://thinfi.com/079uy), password is ``https://github.com/tacohitbox/bypass-it-for-me``
 
+## Unofficial
+- **adfoc.us** - [http://adfoc.us/x1](http://adfoc.us/x1) redirects to ``http://google.com``.
+
 ```
 * = requires captcha-solving service
 ** = not directly to the repo
 ```
+

@@ -6,7 +6,12 @@ const extractors = require("./extractors");
 const {MongoClient} = require("mongodb")
 
 if (!fs.existsSync(`${__dirname}/config.json`)) {
-  fs.copyFileSync(`${__dirname}/config.example.json`, `${__dirname}/config.json`);
+  var base_conf = JSON.parse(fs.readFileSync(`${__dirname}/config.example.json`))
+  if (process.env.CAPTCHA_ENABLED) base_conf.externalCaptchaProvider.active = process.env.CAPTCHA_ENABLED;
+  if (process.env.CAPTCHA_SERVICE) base_conf.externalCaptchaProvider.service = process.env.CAPTCHA_SERVICE;
+  if (process.env.CAPTCHA_KEY) base_conf.externalCaptchaProvider.key = process.env.CAPTCHA_KEY;
+  if (process.env.PORT) base_conf.port = process.env.PORT
+  fs.writeFileSync(`${__dirname}/config.json`,JSON.stringify(base_conf, null, 2));
 }
 
 const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`));
@@ -27,7 +32,7 @@ if (config["db"]["enable"]) {
   })()
 }
 
-app.listen((process.env.PORT || config.port), function() {
+app.listen(config.port, function() {
   console.log(`Server is listening on ${config.port}`);
 });
 

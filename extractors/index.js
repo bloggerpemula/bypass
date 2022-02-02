@@ -1,7 +1,6 @@
 const url = require("url");
 const adshrink = require("./adshrink");
 const linkvertise = require("./linkvertise");
-const shortly = require("./shortly");
 const sub2unlock = require("./sub2unlock");
 const shortconnect = require("./shortconnect");
 const boostink = require("./boostink");

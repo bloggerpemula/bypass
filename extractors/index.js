@@ -32,6 +32,7 @@ const crd = require("./carrd");
 const upto = require("./uptolink");
 const socialunlock = require("./socialunlock");
 const shst = require("./shst");
+const gamesdrive = require("./gamesdrive");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -204,6 +205,11 @@ exports.bypass = function(obj, cb) {
       shst.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
+    return;
+    case "gamesdrive":
+      gamesdrive.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      })
     return;
     default:
       cb("No valid site specified.", null);
@@ -418,6 +424,11 @@ exports.getType = function(link) {
         "site": "shst",
         "needsExternalCaptchaSolving": false
       };
+    case "links.gamesdrive.net":
+      return {
+        "site": "gamesdrive",
+        "needsExternalCaptchaSolving": false
+      }
     default:
       return {
         "site": "generic",

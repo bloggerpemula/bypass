@@ -31,6 +31,7 @@ const bio = require("./biolink");
 const tf = require("./thinfi");
 const crd = require("./carrd");
 const upto = require("./uptolink");
+const socialunlock = require("./socialunlock");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -191,6 +192,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "upto":
       upto.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "socialunlock":
+      socialunlock.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -386,6 +392,11 @@ exports.getType = function(link) {
     case "uptoolink.org":
       return {
         "site": "upto",
+        "needsExternalCaptchaSolving": false
+      }
+    case "social-unlock.com":
+      return {
+        "site": "socialunlock",
         "needsExternalCaptchaSolving": false
       }
     default:

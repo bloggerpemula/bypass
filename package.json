@@ -4,7 +4,7 @@
   "description": "Bypasses link protectors server-side.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,6 @@
     "2captcha": "^2.2.0",
     "agate": "^0.0.1",
     "cheerio": "^1.0.0-rc.10",
-    "crypto-js": "^4.1.1",
     "express": "^4.17.1",
     "got": "^11.8.2",
     "mongodb": "^4.3.1",

@@ -27,7 +27,7 @@ if (config["db"]["enable"]) {
   })()
 }
 
-app.listen(config.port, function() {
+app.listen((process.env.PORT || config.port), function() {
   console.log(`Server is listening on ${config.port}`);
 });
 

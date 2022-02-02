@@ -12,8 +12,8 @@ You can now cache results using a MongoDB database to save bandwidth or money on
 {
   "externalCaptchaProvider": {
     "active": true,
-    "service": "2captcha",
-    "key": "f6fce13f64d72a16b05144dd3138850e"
+    "service": "[redacted]",
+    "key": "[redacted]"
   },
   "port": 32333,
   "db": {

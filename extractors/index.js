@@ -32,6 +32,7 @@ const tf = require("./thinfi");
 const crd = require("./carrd");
 const upto = require("./uptolink");
 const socialunlock = require("./socialunlock");
+const shst = require("./shst");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -197,6 +198,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "socialunlock":
       socialunlock.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "shst":
+      shst.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -393,12 +399,26 @@ exports.getType = function(link) {
       return {
         "site": "upto",
         "needsExternalCaptchaSolving": false
-      }
+      };
     case "social-unlock.com":
       return {
         "site": "socialunlock",
         "needsExternalCaptchaSolving": false
-      }
+      };
+    case "sh.st":
+    case "clkmein.com":
+    case "viid.me":
+    case "xiw34.com":
+    case "corneey.com":
+    case "gestyy.com":
+    case "cllkme.com":
+    case "festyy.com":
+    case "destyy.com":
+    case "cestyy.com":
+      return {
+        "site": "shst",
+        "needsExternalCaptchaSolving": false
+      };
     default:
       return {
         "site": "generic",

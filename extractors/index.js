@@ -33,6 +33,7 @@ const upto = require("./uptolink");
 const socialunlock = require("./socialunlock");
 const shst = require("./shst");
 const gamesdrive = require("./gamesdrive");
+const justpaste = require("./jpi");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -208,6 +209,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "gamesdrive":
       gamesdrive.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      })
+    return;
+    case "jpi":
+      justpaste.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       })
     return;
@@ -428,7 +434,12 @@ exports.getType = function(link) {
       return {
         "site": "gamesdrive",
         "needsExternalCaptchaSolving": false
-      }
+      };
+    case "justpaste.it":
+      return {
+        "site": "jpi",
+        "needsExternalCaptchaSolving": false
+      };
     default:
       return {
         "site": "generic",

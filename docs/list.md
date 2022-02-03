@@ -41,6 +41,7 @@ The true list of compatible sites always depends on the location, availablity, c
 - linktr.ee
 - bio.link
 - carrd.co
+- various redirect warnings on sites (tiktok.com, youtube.com, justpaste.it, steam sites, etc.)
 
 # TBA
 These sites are working on being added, although they don't currently work.

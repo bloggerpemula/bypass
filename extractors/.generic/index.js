@@ -68,6 +68,22 @@ exports.bypass = function(obj, cb) {
       } else {
         cont(resp.url, resp, obj, cb);
       }
+    } else if (u.parse(resp.url, true).hash) {
+      if (isUrl(u.parse(resp.url, true).hash.substring(1))) {
+        cb(null, u.parse(resp.url, true).hash.hash.substring(1));
+      } else if (isUrl(Buffer.from(u.parse(resp.url, true).hash.substring(1), "base64").toString("ascii"))) {
+        cb(null, Buffer.from(u.parse(resp.url, true).hash.substring(1), "base64").toString("ascii"));
+      } else {
+        cont(resp.url, resp, obj, cb);
+      }
+    } else if (u.parse(resp.url, true).query.target) {
+      if (isUrl(u.parse(resp.url, true).query.target)) {
+        cb(null, u.parse(resp.url, true).query.target);
+      } else if (isUrl(Buffer.from(u.parse(resp.url, true).query.target, "base64").toString("ascii"))) {
+        cb(null, Buffer.from(u.parse(resp.url, true).query.target, "base64").toString("ascii"));
+      } else {
+        cont(resp.url, resp, obj, cb);
+      }
     } else {
       cont(resp.url, resp, obj, cb);
     }

@@ -11,7 +11,7 @@ exports.query = function(url, cb) {
       "Content-Length": utils.totalBytes(b)
     },
     timeout: {
-      response: 5000
+      response: 10000
     }
   }).then(function(resp) {
     if (resp.statusCode == 200 || resp.statusCode == 201) {

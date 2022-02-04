@@ -3,6 +3,11 @@ xhr.open(`GET`, `/cache-enabled`);
 xhr.send();
 xhr.onload = function() {
   if (xhr.responseText == "true") document.getElementById("cache-enabled").style.display = "inline-block";
+  xhr.open(`GET`, `/fastforward-enabled`);
+  xhr.send();
+  xhr.onload = function() {
+    if (xhr.responseText == "true") document.getElementById("fastforward-enabled").style.display = "block";
+  }
 }
 
 if (window.location.hash !== "#" && window.location.hash !== "") {
@@ -10,11 +15,12 @@ if (window.location.hash !== "#" && window.location.hash !== "") {
   bypass();
 }
 
-function bypass(incorrect) {
+function bypass(incorrect, ffinc) {
   document.getElementById("success-one").style.display = "none";
   document.getElementById("success-mult").style.display = "none";
   document.getElementById("error").style.display = "none";
   document.getElementById("incorrect-cache-btn").style.display = "none";
+  document.getElementById("incorrect-ff-btn").style.display = "none";
   document.getElementById("incorrect-cache-btn-mult").style.display = "none";
   document.getElementById("load").style.display = "";
   document.querySelectorAll("#links a").forEach(function(ele) {
@@ -35,8 +41,17 @@ function bypass(incorrect) {
   if (document.getElementById("dnch").checked == true) {
     u = `${u}&allowCache=false`;
   }
-  if (incorrect) {
+  if (document.getElementById("igff").checked == true) {
+    u = `${u}&bypassFF=true`;
+  }
+  if (document.getElementById("dnff").checked == true) {
+    u = `${u}&allowFF=false`;
+  }
+  if (incorrect == "y") {
     u = `${u}&incorrectCache=true`;
+  }
+  if (ffinc == "y") {
+    u = `${u}&incorrectFF=true`;
   }
   var xhr = new XMLHttpRequest();
   xhr.open(`GET`, u);
@@ -51,9 +66,8 @@ function bypass(incorrect) {
           document.getElementById("success-one").style.display = "";
           document.getElementById("link").href = json.destination;
           document.getElementById("link").innerHTML = json.destination;
-          if (json.cache) {
-            document.getElementById("incorrect-cache-btn").style.display = "inline-block";
-          }
+          if (json.cache == true) document.getElementById("incorrect-cache-btn").style.display = "inline-block";
+          if (json.fastforward == true) document.getElementById("incorrect-ff-btn").style.display = "inline-block";
         } else if (json.destinations) {
           document.getElementById("success-mult").style.display = "";
           if (json.cache == true) {

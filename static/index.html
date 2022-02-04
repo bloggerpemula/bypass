@@ -24,6 +24,12 @@
           <label for="dnch">Don't cache response?</label>
           <input type="checkbox" id="dnch" name="dnch" autocomplete="off">
         </div>
+        <div id="fastforward-enabled" style="display:none;">
+          <label for="igch">Ignore FastForward?</label>
+          <input type="checkbox" id="igff" name="igff" autocomplete="off"><br>
+          <label for="dnch">Don't share response with FastForward?</label>
+          <input type="checkbox" id="dnff" name="dnff" autocomplete="off">
+        </div>
       </div>
       <div id="load" style="display:none;">
         <div>
@@ -33,7 +39,8 @@
       <div id="success-one" style="display:none;">
         <p>Got link: <a id="link" rel="noreferrer"></a></p><br>
         <button onclick="thisone();">Bypass this URL</button>
-        <button id="incorrect-cache-btn" style="display: none;" onclick="bypass('y');">Incorrect links?</button>
+        <button id="incorrect-cache-btn" style="display: none;" onclick="bypass('y');">Incorrect link?</button>
+        <button id="incorrect-ff-btn" style="display: none;" onclick="bypass('n', 'y');">Wrong FastForward link?</button>
       </div>
       <div id="success-mult" style="display:none;">
         <p>Got links:</p>

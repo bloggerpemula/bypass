@@ -18,7 +18,6 @@ exports.bypass = function(url, cb) {
     for (var c in $(".list-item")) {
       if ($(".list-item")[c] !== undefined && $(".list-item")[c].attribs !== undefined) {
         if ($(".list-item")[c].attribs["data-x-url"] !== undefined) {
-          
           b.push($(".list-item")[c].attribs["data-x-url"]);
         }
       }

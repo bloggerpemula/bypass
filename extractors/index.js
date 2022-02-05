@@ -34,6 +34,7 @@ const socialunlock = require("./socialunlock");
 const shst = require("./shst");
 const gamesdrive = require("./gamesdrive");
 const justpaste = require("./jpi");
+const aml = require("./aml");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -216,6 +217,11 @@ exports.bypass = function(obj, cb) {
       justpaste.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       })
+    return;
+    case "aml":
+      aml.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
     return;
     default:
       cb("No valid site specified.", null);
@@ -438,6 +444,11 @@ exports.getType = function(link) {
     case "justpaste.it":
       return {
         "site": "jpi",
+        "needsExternalCaptchaSolving": false
+      };
+    case "allmylinks.com":
+      return {
+        "site": "aml",
         "needsExternalCaptchaSolving": false
       };
     default:

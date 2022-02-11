@@ -3,6 +3,7 @@ const utils = require("./extractors/.utils");
 
 exports.query = function(url, cb) {
   var u = new URL(url);
+  if (!isCrowdBypass(u.hostname)) {cb("Not crowd-bypassable.", null); return;}
   var b = `domain=${u.hostname}&path=${u.pathname.substring(1)}`;
   got.post("https://crowd.fastforward.team/crowd/query_v1", {
     body: b,
@@ -26,6 +27,7 @@ exports.query = function(url, cb) {
 
 exports.add = function(original, target, cb) {
   var o = new URL(original);
+  if (!isCrowdBypass(o.hostname)) {cb("Not add-able.", null); return;}
   var b = `domain=${o.hostname}&path=${o.pathname.substring(1)}&target=${encodeURIComponent(target)}`;
   got.post("https://crowd.fastforward.team/crowd/contribute_v1", {
     body: b,
@@ -42,4 +44,39 @@ exports.add = function(original, target, cb) {
   }).catch(function(err) {
     cb(err, null);
   });
+}
+
+function isCrowdBypass(host) {
+  switch(host) {
+    case "lnk2.cc":
+    case "ouo.press":
+    case "ouo.io":
+    case "za.gl":
+    case "za.uy":
+    case "uiz.io":
+    case "uiz.app":
+    case "moon7.xyz":
+    case "fc-lc.com":
+    case "lompat.in":
+    case "elil.cc":
+    case "squidssh.com":
+    case "goodssh.com":
+    case "cpmlink.net":
+    case "shon.xyz":
+    case "likn.xyz":
+    case "sloomp.space":
+    case "cshort.org":
+    case "shorten.sh":
+    case "expertvn.com":
+    case "mediafile.cloud":
+    case "gplinks.co":
+    case "wadoo.com":
+    case "gotravelgo.space":
+    case "pantauterus.me":
+    case "liputannubi.net":
+    case "rom.io":
+      return true;
+    default: 
+      return false;
+  }
 }

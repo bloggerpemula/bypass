@@ -87,11 +87,11 @@ app.get("/api/bypass", async function(req, res) {
       });
     }
 
-    /*if (config["fastforward"] == true && req.query.ignoreFF !== "true" && req.query.incorrectFF !== "true" && pass == null) {
+    if (config["fastforward"] == true && req.query.ignoreFF !== "true" && req.query.incorrectFF !== "true" && pass == null) {
       fastforward.query(requestedUrl, async function(err, resp) {
         if (err) {
           if (typeof err == "string") {
-            if (err !== "Not in database.") console.log(err);
+            if (err !== "Not in database." && err !== "Not crowd-bypassable.") console.log(err);
           } else if (typeof err == "object"){
             if (err.event !== "response") console.log(err);
           }
@@ -119,10 +119,10 @@ app.get("/api/bypass", async function(req, res) {
           });
         }
       });
-    } else {*/
+    } else {
       bypass(requestedUrl, pass, req, res);
-    /*}
-  */} else {
+    }
+  } else {
     res.send({
       success: false,
       err: "URL is required for this parameter."
@@ -158,7 +158,7 @@ app.get("/cache-enabled", function(req, res) {
 });
 
 app.get("/fastforward-enabled", function(req, res) {
-  res.send((false));
+  res.send((config["fastforward"] || false));
 });
 
 function bypass(requestedUrl, pass, req, res) {
@@ -201,17 +201,17 @@ function bypass(requestedUrl, pass, req, res) {
               });
             }
           }
-          /*if (config["fastforward"] == true) {
+          if (config["fastforward"] == true) {
             fastforward.add(requestedUrl, resp, function(err, resp) {
               if (err) {
-                if (typeof err == "string" && err !== "Not reported.") {
+                if (typeof err == "string" && err !== "Not reported." && err !== "Not add-able.") {
                   console.log(err);
                 } else if (typeof err !== "string") {
                   console.log(err);
                 }
               }
             });
-          }*/
+          }
           res.send({
             success: true,
             destination: resp,
@@ -246,7 +246,7 @@ function bypass(requestedUrl, pass, req, res) {
             if (config["fastforward"] == true && req.query.allowFF !== "false") {
               fastforward.add(requestedUrl, resp[0], function(err, resp) {
                 if (err) {
-                  if (typeof err == "string" && err !== "Not reported.") {
+                  if (typeof err == "string" && err !== "Not reported." && err !== "Not add-able.") {
                     console.log(err);
                   } else if (typeof err !== "string") {
                     console.log(err);

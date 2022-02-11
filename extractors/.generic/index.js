@@ -98,6 +98,9 @@ function isUrl(url) {
 
 function cont(url, resp, obj, cb) {
   if (resp.headers.location) {
+    if (!resp.headers.location.startsWith("http://") && !resp.headers.location.startsWith("https://")) {
+      resp.headers.location = `${url.split("/").slice(0, 3).join("/")}/${resp.headers.location}`;
+    }
     if (resp.url.includes("//adf.ly") || resp.url.includes("tinyurl.com/") && resp.headers.location.includes("preview.tinyurl.com")) {
       obj.url = resp.headers.location;
       require(".").bypass(obj, function(err, res) {

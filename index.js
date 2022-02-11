@@ -87,7 +87,7 @@ app.get("/api/bypass", async function(req, res) {
       });
     }
 
-    if (config["fastforward"] == true && req.query.ignoreFF !== "true" && req.query.incorrectFF !== "true" && pass == null) {
+    /*if (config["fastforward"] == true && req.query.ignoreFF !== "true" && req.query.incorrectFF !== "true" && pass == null) {
       fastforward.query(requestedUrl, async function(err, resp) {
         if (err) {
           if (typeof err == "string") {
@@ -119,10 +119,10 @@ app.get("/api/bypass", async function(req, res) {
           });
         }
       });
-    } else {
+    } else {*/
       bypass(requestedUrl, pass, req, res);
-    }
-  } else {
+    /*}
+  */} else {
     res.send({
       success: false,
       err: "URL is required for this parameter."
@@ -158,7 +158,7 @@ app.get("/cache-enabled", function(req, res) {
 });
 
 app.get("/fastforward-enabled", function(req, res) {
-  res.send((config["fastforward"] || false));
+  res.send((false));
 });
 
 function bypass(requestedUrl, pass, req, res) {
@@ -201,7 +201,7 @@ function bypass(requestedUrl, pass, req, res) {
               });
             }
           }
-          if (config["fastforward"] == true) {
+          /*if (config["fastforward"] == true) {
             fastforward.add(requestedUrl, resp, function(err, resp) {
               if (err) {
                 if (typeof err == "string" && err !== "Not reported.") {
@@ -211,7 +211,7 @@ function bypass(requestedUrl, pass, req, res) {
                 }
               }
             });
-          }
+          }*/
           res.send({
             success: true,
             destination: resp,

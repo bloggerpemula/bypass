@@ -44,31 +44,36 @@ exports.bypass = async function (url, cb) {
 }
 
 async function ageGate(account, link_id, ref) {
-  var b = JSON.stringify({
-    "accountId": account,
-    "requestSource": { "referer": null },
-    "validationInput": { "acceptedSensitiveContent": [link_id] }
-  });
-  let resp = await got.post("https://linktr.ee/api/profiles/validation/gates", {
-    body: b,
-    headers: {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-      "Accept": "application/json, text/plain, */*",
-      "Accept-Language": "en-US,en;q=0.5",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Content-Type": "application/json",
-      "Content-Length": utils.totalBytes(b),
-      "DNT": "1",
-      "Origin": "https://linktr.ee",
-      "Sec-Fetch-Dest": "empty",
-      "Sec-Fetch-Mode": "no-cors",
-      "Sec-Fetch-Site": "same-origin",
-      "Connection": "keep-alive",
-      "Pragma": "no-cache",
-      "Sec-GPC": "1",
-      "Referer": ref,
-      "Upgrade-Insecure-Requests": "1"
-    }
-  })
-  return JSON.parse(resp.body).links[0].url;
+
+  try {
+    var b = JSON.stringify({
+      "accountId": account,
+      "requestSource": { "referer": null },
+      "validationInput": { "acceptedSensitiveContent": [link_id] }
+    });
+    let resp = await got.post("https://linktr.ee/api/profiles/validation/gates", {
+      body: b,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Content-Type": "application/json",
+        "Content-Length": utils.totalBytes(b),
+        "DNT": "1",
+        "Origin": "https://linktr.ee",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "no-cors",
+        "Sec-Fetch-Site": "same-origin",
+        "Connection": "keep-alive",
+        "Pragma": "no-cache",
+        "Sec-GPC": "1",
+        "Referer": ref,
+        "Upgrade-Insecure-Requests": "1"
+      }
+    })
+    return JSON.parse(resp.body).links[0].url;
+  } catch(e) {
+    return e;
+  }
 }

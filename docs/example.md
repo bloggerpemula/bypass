@@ -9,6 +9,7 @@ All of these redirect to the repo you're at right now ([http://github.com/tacohi
 - **boostme.link** - [https://boostme.link/5l_D](https://boostme.link/5l_D) 
 - **social-unlock.com** - [https://social-unlock.com/bUg1H](https://social-unlock.com/bUg1H)
 - **sh.st** - [http://corneey.com/eaQe3V](http://corneey.com/eaQe3V)
+- **lnk2.cc** - [https://lnk2.cc/XrCVf](https://lnk2.cc/XrCVf)
 - **cshort.org** - [https://cshort.org/Be7QuvCx](https://cshort.org/Be7QuvCx)
 - **thinfi.com** - [https://thinfi.com/079uy](https://thinfi.com/079uy), password is ``https://github.com/tacohitbox/bypass-it-for-me``
 

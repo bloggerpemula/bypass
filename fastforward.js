@@ -48,14 +48,8 @@ exports.add = function(original, target, cb) {
 
 function isCrowdBypass(host) {
   switch(host) {
-    case "lnk2.cc":
-    case "ouo.press":
-    case "ouo.io":
     case "za.gl":
     case "za.uy":
-    case "uiz.io":
-    case "uiz.app":
-    case "moon7.xyz":
     case "fc-lc.com":
     case "lompat.in":
     case "elil.cc":

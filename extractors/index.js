@@ -37,6 +37,7 @@ const justpaste = require("./jpi");
 const aml = require("./aml");
 const gps = require("./gps");
 const cshort = require("./cshort");
+const lnk2 = require("./lnk2");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -232,6 +233,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "cshort":
       cshort.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "lnk2":
+      lnk2.bypass(obj, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -474,6 +480,11 @@ exports.getType = function(link) {
         "site": "cshort",
         "needsExternalCaptchaSolving": false
       };
+    case "lnk2.cc":
+      return {
+        "site": "lnk2",
+        "needsExternalCaptchaSolving": true
+      }
     default:
       return {
         "site": "generic",

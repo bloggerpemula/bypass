@@ -65,7 +65,6 @@ function isCrowdBypass(host) {
     case "shon.xyz":
     case "likn.xyz":
     case "sloomp.space":
-    case "cshort.org":
     case "shorten.sh":
     case "expertvn.com":
     case "mediafile.cloud":

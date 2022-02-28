@@ -36,6 +36,7 @@ const gamesdrive = require("./gamesdrive");
 const justpaste = require("./jpi");
 const aml = require("./aml");
 const gps = require("./gps");
+const cshort = require("./cshort");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -226,6 +227,11 @@ exports.bypass = function(obj, cb) {
     return;
     case "getpaidstock":
       gps.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "cshort":
+      cshort.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -461,6 +467,11 @@ exports.getType = function(link) {
     case "getpaidstock.com":
       return {
         "site": "getpaidstock",
+        "needsExternalCaptchaSolving": false
+      };
+    case "cshort.org": 
+      return {
+        "site": "cshort",
         "needsExternalCaptchaSolving": false
       };
     default:

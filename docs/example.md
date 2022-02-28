@@ -8,7 +8,8 @@ All of these redirect to the repo you're at right now ([http://github.com/tacohi
 - **boost.ink** - [https://boost.ink/kvangf](https://boost.ink/kvangf)
 - **boostme.link** - [https://boostme.link/5l_D](https://boostme.link/5l_D) 
 - **social-unlock.com** - [https://social-unlock.com/bUg1H](https://social-unlock.com/bUg1H)
-- **sh.st alias** - [http://corneey.com/eaQe3V](http://corneey.com/eaQe3V)
+- **sh.st** - [http://corneey.com/eaQe3V](http://corneey.com/eaQe3V)
+- **cshort.org** - [https://cshort.org/Be7QuvCx](https://cshort.org/Be7QuvCx)
 - **thinfi.com** - [https://thinfi.com/079uy](https://thinfi.com/079uy), password is ``https://github.com/tacohitbox/bypass-it-for-me``
 
 ## Unofficial

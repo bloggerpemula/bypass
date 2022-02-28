@@ -97,21 +97,12 @@ function isUrl(url) {
 }
 
 function cont(url, resp, obj, cb) {
-  if (resp.headers.location) {
-    if (!resp.headers.location.startsWith("http://") && !resp.headers.location.startsWith("https://")) {
-      resp.headers.location = `${url.split("/").slice(0, 3).join("/")}/${resp.headers.location}`;
-    }
-    if (resp.url.includes("//adf.ly") || resp.url.includes("tinyurl.com/") && resp.headers.location.includes("preview.tinyurl.com")) {
-      obj.url = resp.headers.location;
-      require(".").bypass(obj, function(err, res) {
-        if (err) {
-          cb(null, resp.headers.location);
-        } else {
-          cb(null, res);
-        }
-      });
-    } else {
-      if (resp.headers.location == `${url}/`) {
+  try {
+    if (resp.headers.location) {
+      if (!resp.headers.location.startsWith("http://") && !resp.headers.location.startsWith("https://")) {
+        resp.headers.location = `${url.split("/").slice(0, 3).join("/")}/${resp.headers.location}`;
+      }
+      if (resp.url.includes("//adf.ly") || resp.url.includes("tinyurl.com/") && resp.headers.location.includes("preview.tinyurl.com")) {
         obj.url = resp.headers.location;
         require(".").bypass(obj, function(err, res) {
           if (err) {
@@ -121,124 +112,137 @@ function cont(url, resp, obj, cb) {
           }
         });
       } else {
-        cb(null, resp.headers.location);
-      }
-    } 
-  } else if (resp.body.includes(`content="0;URL=`)) {
-    cb(null, resp.body.split(`content="0;URL=`)[1].split(`"`)[0]);
-  } else {
-    var $ = cheerio.load(resp.body);
-    if ($("#wpsafe-link a").attr("href") && $("#wpsafe-link a").attr("href").includes("safelink_redirect")) {
-      var a = u.parse($("#wpsafe-link a").attr("href"), true).query["safelink_redirect"];
-      a = Buffer.from(a, "base64").toString("ascii");
-      a = JSON.parse(a);
-      a = decodeURIComponent(a.safelink);
-      cb(null, a);
-    } else if ($(".bl-logo-br").length > 0) {
-      var bl = require("../biolink");
-      bl.bypass(url, function(err, res) {cb(err, res);})
-    } else if ($("#footer").length > 0 && $("#footer").text().split("DaddyScripts").length > 0) {
-      // daddy's link protector
-      var c = utils.cookieString(scp(resp.headers["set-cookie"]));
-      if ($("form img").length > 0) {
-        if (utils.supportedCaptcha(obj.captcha.service)) {
-          var i = `https://${u.parse(url, true).host}/${$("form img").attr("src")}`;
-          getImage(i, resp.url, c, function(err, res) {
-            if (err) {cb(err, null);} else {
-              utils.captcha({
-                ref: resp.url,
-                meta: {
-                  type: "image",
-                  image: res,
-                  options: {}
-                },
-                service: obj.captcha
-              }, function(err, re) {
-                if (err) {cb(err, null);} else {
-                  var b = `security_code=${re}&submit1=Submit`;
-                  got.post(resp.url, {
-                    body: b,
-                    headers: {
-                      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-                      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-                      "Accept-Language": "en-US,en;q=0.5",
-                      "Accept-Encoding": "gzip, deflate, br",
-                      "Connection": "keep-alive",
-                      "Cache-Control": "no-cache",
-                      "Content-Length": utils.totalBytes(b),
-                      "Content-Type": "application/x-www-form-urlencoded",
-                      "Cookie": c,
-                      "DNT": "1",
-                      "Pragma": "no-cache",
-                      "Referer": resp.url,
-                      "Sec-Fetch-Dest": "document",
-                      "Sec-Fetch-Mode": "navigate",
-                      "Sec-Fetch-Site": "same-origin",
-                      "Sec-Fetch-User": "?1",
-                      "Sec-GPC": "1",
-                      "Upgrade-Insecure-Requests": "1"
-                    }
-                  }).then(function(resp) {
-                    var $ = cheerio.load(resp.body);
-                    var l = [];
-                    for (var c in $("center p a")) {
-                      if ($("center p a")[c] !== undefined && $("center p a")[c].attribs !== undefined && $("center p a")[c].attribs.href !== undefined) {l.push($("center p a")[c].attribs.href);}
-                    }
-                    cb(null, l);
-                  }).catch(function(err) {
-                    cb(err, null);
-                  });
-                }
-              })
+        if (resp.headers.location == `${url}/`) {
+          obj.url = resp.headers.location;
+          require(".").bypass(obj, function(err, res) {
+            if (err) {
+              cb(null, resp.headers.location);
+            } else {
+              cb(null, res);
             }
           });
         } else {
-          cb("This bypass requires a CAPTCHA solver, but this instance doesn't support them.", null);
+          cb(null, resp.headers.location);
         }
-      } else {
-        if (obj.password == null) {
-          cb("This bypass requires a password, but there isn't one specified.", null);
-        } else {
-          var b = `Pass1=${obj.password}&Submit0=Submit`;
-          got.post(resp.url, {
-            body: b,
-            headers: {
-              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-              "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-              "Accept-Language": "en-US,en;q=0.5",
-              "Accept-Encoding": "gzip, deflate, br",
-              "Connection": "keep-alive",
-              "Cache-Control": "no-cache",
-              "Content-Length": utils.totalBytes(b),
-              "Content-Type": "application/x-www-form-urlencoded",
-              "Cookie": c,
-              "DNT": "1",
-              "Pragma": "no-cache",
-              "Referer": resp.url,
-              "Sec-Fetch-Dest": "document",
-              "Sec-Fetch-Mode": "navigate",
-              "Sec-Fetch-Site": "same-origin",
-              "Sec-Fetch-User": "?1",
-              "Sec-GPC": "1",
-              "Upgrade-Insecure-Requests": "1"
-            }
-          }).then(function(resp) {
-            var $ = cheerio.load(resp.body);
-            var l = [];
-            for (var c in $("center p a")) {
-              if ($("center p a")[c] !== undefined && $("center p a")[c].attribs !== undefined && $("center p a")[c].attribs.href !== undefined) {l.push($("center p a")[c].attribs.href);}
-            }
-            cb(null, l, true);
-          }).catch(function(err) {
-            cb(err, null);
-          });
-        }
-      }
-    } else if ($("#redirecturl").length > 0) {
-      cb(null, $("#redirecturl").attr("href"));
+      } 
+    } else if (resp.body.includes(`content="0;URL=`)) {
+      cb(null, resp.body.split(`content="0;URL=`)[1].split(`"`)[0]);
     } else {
-      cb("No redirects found.", null);
+      var $ = cheerio.load(resp.body);
+      if ($("#wpsafe-link a").attr("href") && $("#wpsafe-link a").attr("href").includes("safelink_redirect")) {
+        var a = u.parse($("#wpsafe-link a").attr("href"), true).query["safelink_redirect"];
+        a = Buffer.from(a, "base64").toString("ascii");
+        a = JSON.parse(a);
+        a = decodeURIComponent(a.safelink);
+        cb(null, a);
+      } else if ($(".bl-logo-br").length > 0) {
+        var bl = require("../biolink");
+        bl.bypass(url, function(err, res) {cb(err, res);})
+      } else if ($("#footer").length > 0 && $("#footer").text().split("DaddyScripts").length > 0) {
+        // daddy's link protector
+        var c = utils.cookieString(scp(resp.headers["set-cookie"]));
+        if ($("form img").length > 0) {
+          if (utils.supportedCaptcha(obj.captcha.service)) {
+            var i = `https://${u.parse(url, true).host}/${$("form img").attr("src")}`;
+            getImage(i, resp.url, c, function(err, res) {
+              if (err) {cb(err, null);} else {
+                utils.captcha({
+                  ref: resp.url,
+                  meta: {
+                    type: "image",
+                    image: res,
+                    options: {}
+                  },
+                  service: obj.captcha
+                }, function(err, re) {
+                  if (err) {cb(err, null);} else {
+                    var b = `security_code=${re}&submit1=Submit`;
+                    got.post(resp.url, {
+                      body: b,
+                      headers: {
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                        "Accept-Language": "en-US,en;q=0.5",
+                        "Accept-Encoding": "gzip, deflate, br",
+                        "Connection": "keep-alive",
+                        "Cache-Control": "no-cache",
+                        "Content-Length": utils.totalBytes(b),
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Cookie": c,
+                        "DNT": "1",
+                        "Pragma": "no-cache",
+                        "Referer": resp.url,
+                        "Sec-Fetch-Dest": "document",
+                        "Sec-Fetch-Mode": "navigate",
+                        "Sec-Fetch-Site": "same-origin",
+                        "Sec-Fetch-User": "?1",
+                        "Sec-GPC": "1",
+                        "Upgrade-Insecure-Requests": "1"
+                      }
+                    }).then(function(resp) {
+                      var $ = cheerio.load(resp.body);
+                      var l = [];
+                      for (var c in $("center p a")) {
+                        if ($("center p a")[c] !== undefined && $("center p a")[c].attribs !== undefined && $("center p a")[c].attribs.href !== undefined) {l.push($("center p a")[c].attribs.href);}
+                      }
+                      cb(null, l);
+                    }).catch(function(err) {
+                      cb(err, null);
+                    });
+                  }
+                })
+              }
+            });
+          } else {
+            cb("This bypass requires a CAPTCHA solver, but this instance doesn't support them.", null);
+          }
+        } else {
+          if (obj.password == null) {
+            cb("This bypass requires a password, but there isn't one specified.", null);
+          } else {
+            var b = `Pass1=${obj.password}&Submit0=Submit`;
+            got.post(resp.url, {
+              body: b,
+              headers: {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.5",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Content-Length": utils.totalBytes(b),
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Cookie": c,
+                "DNT": "1",
+                "Pragma": "no-cache",
+                "Referer": resp.url,
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "same-origin",
+                "Sec-Fetch-User": "?1",
+                "Sec-GPC": "1",
+                "Upgrade-Insecure-Requests": "1"
+              }
+            }).then(function(resp) {
+              var $ = cheerio.load(resp.body);
+              var l = [];
+              for (var c in $("center p a")) {
+                if ($("center p a")[c] !== undefined && $("center p a")[c].attribs !== undefined && $("center p a")[c].attribs.href !== undefined) {l.push($("center p a")[c].attribs.href);}
+              }
+              cb(null, l, true);
+            }).catch(function(err) {
+              cb(err, null);
+            });
+          }
+        }
+      } else if ($("#redirecturl").length > 0) {
+        cb(null, $("#redirecturl").attr("href"));
+      } else {
+        cb("No redirects found.", null);
+      }
     }
+  } catch(e) {
+    if (cb && typeof cb == "function") cb(e, null);
   }
 }
 

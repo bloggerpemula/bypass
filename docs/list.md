@@ -25,6 +25,7 @@ The true list of compatible sites always depends on the location, availablity, c
 - sub4unlock.com / shorte.be
 - subforunlock.com
 - uptolink1.com / uptoolink.org
+- cshort.org
 - getpaidstock.com (both redirect/direct image link)
 - ``wpsafelink`` using sites (ps2gamer.com, saferoms.com)
 - ``Daddy's Link Protector`` (Captcha-protected links don't currently work)

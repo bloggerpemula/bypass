@@ -44,7 +44,6 @@ exports.bypass = async function (url, cb) {
 }
 
 async function ageGate(account, link_id, ref) {
-
   try {
     var b = JSON.stringify({
       "accountId": account,

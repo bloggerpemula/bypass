@@ -201,6 +201,12 @@ function bypass(requestedUrl, pass, req, res) {
               });
             }
           }
+          res.send({
+            success: true,
+            destination: resp,
+            cache: false,
+            fastforward: false
+          });
           if (config["fastforward"] == true) {
             fastforward.add(requestedUrl, resp, function(err, resp) {
               if (err) {
@@ -212,12 +218,6 @@ function bypass(requestedUrl, pass, req, res) {
               }
             });
           }
-          res.send({
-            success: true,
-            destination: resp,
-            cache: false,
-            fastforward: false
-          });
         } else if (typeof resp == "object") {
           if (config["db"]["enable"] && req.query.allowCache !== "false") {
             const db = client.db("bifm");
@@ -243,6 +243,12 @@ function bypass(requestedUrl, pass, req, res) {
               fastforward: false
             });
           } else if (resp.length == 1) {
+            res.send({
+              success: true,
+              destination: resp[0],
+              cache: false,
+              fastforward: false
+            });
             if (config["fastforward"] == true && req.query.allowFF !== "false") {
               fastforward.add(requestedUrl, resp[0], function(err, resp) {
                 if (err) {
@@ -254,12 +260,6 @@ function bypass(requestedUrl, pass, req, res) {
                 }
               });
             }
-            res.send({
-              success: true,
-              destination: resp[0],
-              cache: false,
-              fastforward: false
-            });
           } else {
             res.send({
               success: false,

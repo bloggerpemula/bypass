@@ -97,6 +97,12 @@ app.get("/api/bypass", async function(req, res) {
           }
           bypass(requestedUrl, pass, req, res);
         } else {
+          res.send({
+            success: true,
+            destination: resp,
+            cache: false,
+            fastforward: true
+          });
           if (config["db"]["enable"] && req.query.allowCache !== "false") {
             const db = client.db("bifm");
             const cl = db.collection("links");
@@ -111,12 +117,6 @@ app.get("/api/bypass", async function(req, res) {
               });
             }
           }
-          res.send({
-            success: true,
-            destination: resp,
-            cache: false,
-            fastforward: true
-          });
         }
       });
     } else {
@@ -185,6 +185,12 @@ function bypass(requestedUrl, pass, req, res) {
         });
       } else {
         if (typeof resp == "string" && resp !== "") {
+          res.send({
+            success: true,
+            destination: resp,
+            cache: false,
+            fastforward: false
+          });
           if (config["db"]["enable"] && req.query.allowCache !== "false") {
             const db = client.db("bifm");
             const cl = db.collection("links");
@@ -201,12 +207,6 @@ function bypass(requestedUrl, pass, req, res) {
               });
             }
           }
-          res.send({
-            success: true,
-            destination: resp,
-            cache: false,
-            fastforward: false
-          });
           if (config["fastforward"] == true) {
             fastforward.add(requestedUrl, resp, function(err, resp) {
               if (err) {
@@ -219,22 +219,6 @@ function bypass(requestedUrl, pass, req, res) {
             });
           }
         } else if (typeof resp == "object") {
-          if (config["db"]["enable"] && req.query.allowCache !== "false") {
-            const db = client.db("bifm");
-            const cl = db.collection("links");
-            const f = await cl.find({url: requestedUrl}).toArray();
-            if (!f[0] || req.query.incorrectCache == "true") {
-              p = pw;
-              if (p == undefined) p = false;
-              cl.insertOne({
-                url: requestedUrl,
-                response: resp,
-                date: new Date().toTimeString(),
-                hadPassword: p,
-                password: pass
-              });
-            }
-          }
           if (resp.length > 1) {
             res.send({
               success: true,
@@ -265,6 +249,22 @@ function bypass(requestedUrl, pass, req, res) {
               success: false,
               err: "Recieved invalid response from backend."
             });
+          }
+          if (config["db"]["enable"] && req.query.allowCache !== "false") {
+            const db = client.db("bifm");
+            const cl = db.collection("links");
+            const f = await cl.find({url: requestedUrl}).toArray();
+            if (!f[0] || req.query.incorrectCache == "true") {
+              p = pw;
+              if (p == undefined) p = false;
+              cl.insertOne({
+                url: requestedUrl,
+                response: resp,
+                date: new Date().toTimeString(),
+                hadPassword: p,
+                password: pass
+              });
+            }
           }
         } else {
           res.send({

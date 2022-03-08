@@ -250,11 +250,13 @@ exports.bypass = function(obj, cb) {
 exports.getType = function(link) {
   var u = url.parse(link, true).host;
   if (u.split(".")[0] == "www") {u = u.substring(4);}
-  if (u.split(".")[1] == "carrd" && u.split(".")[2] == "co") {
-    return {
-      "site": "carrd",
-      "needsExternalCaptchaSolving": false
-    };
+  if (u.split.length >= 3) {
+    if (u.split(".")[1] == "carrd" && u.split(".")[2] == "co") {
+      return {
+        "site": "carrd",
+        "needsExternalCaptchaSolving": false
+      };
+    }
   }
   switch(u) {
     case "adshrink.it":

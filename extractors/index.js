@@ -38,6 +38,8 @@ const aml = require("./aml");
 const gps = require("./gps");
 const cshort = require("./cshort");
 const lnk2 = require("./lnk2");
+const sirigan = require("./sirigan");
+const sharer = require("./sharer");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -238,6 +240,16 @@ exports.bypass = function(obj, cb) {
     return;
     case "lnk2":
       lnk2.bypass(obj, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "sirigan": 
+      sirigan.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    case "sharer":
+      sharer.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -486,7 +498,17 @@ exports.getType = function(link) {
       return {
         "site": "lnk2",
         "needsExternalCaptchaSolving": true
-      }
+      };
+    case "safeurl.sirigan.my.id":
+      return {
+        "site": "sirigan",
+        "needsExternalCaptchaSolving": false
+      };
+    case "sharer.pw":
+      return {
+        "site": "sharer",
+        "needsExternalCaptchaSolving": false
+      };
     default:
       return {
         "site": "generic",

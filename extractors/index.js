@@ -39,7 +39,6 @@ const gps = require("./gps");
 const cshort = require("./cshort");
 const lnk2 = require("./lnk2");
 const sirigan = require("./sirigan");
-const sharer = require("./sharer");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -245,11 +244,6 @@ exports.bypass = function(obj, cb) {
     return;
     case "sirigan": 
       sirigan.bypass(obj.url, function(err, resp) {
-        cb(err, resp);
-      });
-    return;
-    case "sharer":
-      sharer.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -502,11 +496,6 @@ exports.getType = function(link) {
     case "safeurl.sirigan.my.id":
       return {
         "site": "sirigan",
-        "needsExternalCaptchaSolving": false
-      };
-    case "sharer.pw":
-      return {
-        "site": "sharer",
         "needsExternalCaptchaSolving": false
       };
     default:

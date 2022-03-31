@@ -39,6 +39,8 @@ const gps = require("./gps");
 const cshort = require("./cshort");
 const lnk2 = require("./lnk2");
 const sirigan = require("./sirigan");
+//const lksk = require("./linkshrink");
+const multiup = require("./multiup");
 
 exports.bypass = function(obj, cb) {
   switch(obj.site) {
@@ -244,6 +246,16 @@ exports.bypass = function(obj, cb) {
     return;
     case "sirigan": 
       sirigan.bypass(obj.url, function(err, resp) {
+        cb(err, resp);
+      });
+    return;
+    //case "linkshrink":
+    //  lksk.bypass(obj.url, function(err, resp) {
+    //    cb(err, resp);
+    //  });
+    //return;
+    case "multiup":
+      multiup.bypass(obj.url, function(err, resp) {
         cb(err, resp);
       });
     return;
@@ -496,6 +508,16 @@ exports.getType = function(link) {
     case "safeurl.sirigan.my.id":
       return {
         "site": "sirigan",
+        "needsExternalCaptchaSolving": false
+      };
+    //case "linkshrink.net": 
+    //  return {
+    //    "site": "linkshrink",
+    //    "needsExternalCaptchaSolving": false
+    //  }
+    case "multiup.org":
+      return {
+        "site": "multiup",
         "needsExternalCaptchaSolving": false
       };
     default:

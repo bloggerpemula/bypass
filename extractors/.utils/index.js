@@ -8,6 +8,7 @@ exports.totalBytes = function(string) {
 exports.cookieString = function (cookie) {
   var s = "";
   for (var c in cookie) {
+    if (cookie[c].value == "deleted") {continue;}
     s = `${s} ${cookie[c].name}=${encodeURIComponent(cookie[c].value)};`;
   }
   var s = s.substring(1);

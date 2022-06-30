@@ -1,62 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BypassItForMe</title>
+    <center><title>Bypass All Shortlinks</title></center>
     <link href="/css/main.css" rel="stylesheet">
     <link href="/css/load.css" rel="stylesheet">
     <meta name="viewport" content="width=devide-width, inital-scale=1.0">
   </head>
   <body>
-    <div>
-      <h2 style="margin:0 0 5px 0">BypassItForMe</h2>
-      <p class="nm">Bypass adlinks and tracking with BIFM.</p>
-    </div>
-    <div class="rs">
-      <input placeholder="Enter the wanted URL here." id="url" autocomplete="off">
-      <button class="bp-btn" onclick="bypass();">Bypass</button><br>
-      <div style="margin-top:5px;margin-bottom:5px;">
-        <label for="hpw">Password?</label>
-        <input type="checkbox" id="has-pw" name="hpw" oninput="togglePw(this.checked)" autocomplete="off">
-        <input type="password" id="pw" name="pw" placeholder="Password" style="display:none;"><br>
-        <div id="cache-enabled" style="display:none;">
-          <label for="igch">Ignore cache?</label>
-          <input type="checkbox" id="igch" name="igch" autocomplete="off"><br>
-          <label for="dnch">Don't cache response?</label>
-          <input type="checkbox" id="dnch" name="dnch" autocomplete="off">
-        </div>
-        <div id="fastforward-enabled" style="display:none;">
-          <label for="igff">Ignore FastForward?</label>
-          <input type="checkbox" id="igff" name="igff" autocomplete="off"><br>
-          <label for="dnff">Don't share response with FastForward?</label>
-          <input type="checkbox" id="dnff" name="dnff" autocomplete="off">
-        </div>
-      </div>
-      <div id="load" style="display:none;">
-        <div>
-          <div class="lds-facebook"><div></div><div></div><div></div></div>
-        </div>
-      </div>
-      <div id="success-one" style="display:none;">
-        <p>Got link: <a id="link" rel="noreferrer"></a></p><br>
-        <button onclick="thisone();">Bypass this URL</button>
-        <button id="incorrect-cache-btn" style="display: none;" onclick="bypass('y');">Incorrect link?</button>
-        <button id="incorrect-ff-btn" style="display: none;" onclick="bypass('n', 'y');">Wrong FastForward link?</button>
-      </div>
-      <div id="success-mult" style="display:none;">
-        <p>Got links:</p>
-        <div id="links"></div>
-        <button id="incorrect-cache-btn-mult" style="display: none; margin-top:2px;" onclick="bypass('y');">Incorrect links?</button>
-      </div>
-      <div id="error" style="display:none;">
-        <p>An error has occured! <span style="color:red;" id="err-txt"></span></p>
-        <a id="og" target="_blank" rel="noreferrer">Open original link.</a>
-      </div>
-    </div>
-    <p style="margin:5px 0;">This site is open sourced (<a href="http://github.com/tacohitbox/bypass-it-for-me">source code</a>).</p>
-    <p style="margin:5px 0;">This site also has a <a href="https://tacohitbox.com/privacy">privacy policy.</a></p>
-    <noscript>
-      <i>This website uses Javascript. You can use our API documented <a href="http://github.com/tacohitbox/bypass-it-for-me">here</a> if needed.</i>
-    </noscript>
+   
   </body>
   <script src="/js/unhide.js"></script>
   <script src="/js/app.js"></script>
